@@ -33,6 +33,10 @@ public class Contact {
     @JoinColumn(name = "personId")
     private Person person;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "referencePersonId")
+    private Person person2;
+
     @OneToOne(mappedBy = "contact")
     private House house;
 }

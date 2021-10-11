@@ -36,4 +36,6 @@ public class Address {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personId")
     private Person person;
+
+
 }

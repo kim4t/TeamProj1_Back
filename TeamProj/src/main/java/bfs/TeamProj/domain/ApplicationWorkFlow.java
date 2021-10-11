@@ -3,17 +3,30 @@ package bfs.TeamProj.domain;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
-@RequiredArgsConstructor
+@Entity
+@Table(name = "applicationWorkFlow")
 public class ApplicationWorkFlow {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     private Integer id;
-    private Integer employeeId;
+    @Column(name = "createdDate", nullable = false, length = 250)
     private LocalDate createdDate;
+    @Column(name = "modificationDate", nullable = false, length = 250)
     private LocalDate modificationDate;
+    @Column(name = "status", nullable = false, length = 250)
     private String status;
+    @Column(name = "comments", nullable = true, length = 250)
     private String comments;
+    @Column(name = "type", nullable = false, length = 250)
     private String type;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employeeId")
+    private Employee employee;
 }
 

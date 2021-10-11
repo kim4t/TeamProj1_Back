@@ -23,5 +23,7 @@ public class Facility {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "houseId")
     private House house;
+
+
 }
 
