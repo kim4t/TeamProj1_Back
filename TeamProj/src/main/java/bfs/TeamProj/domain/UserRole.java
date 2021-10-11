@@ -2,16 +2,31 @@ package bfs.TeamProj.domain;
 
 import lombok.*;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
-@RequiredArgsConstructor
+@Entity
+@Table(name = "userRole")
 public class UserRole {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", unique = true, nullable = false)
     private Integer id;
-    private Integer userId;
-    private Integer roleId;
+    @Column(name = "activeFlag", nullable = false)
     private Boolean activeFlag;
+    @Column(name = "modificationDate", nullable = false, length = 250)
     private LocalDate modificationDate;
+    @Column(name = "lastModificationUser", nullable = false, length = 250)
     private String lastModificationUser;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userId")
+    private User user;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "roleId")
+    private Role role;
+
 }
 
