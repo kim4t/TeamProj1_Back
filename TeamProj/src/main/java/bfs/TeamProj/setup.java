@@ -30,6 +30,7 @@ public class setup implements CommandLineRunner {
         logger.info("start to insert data");
 
 
+
         /*
         Person p = new Person();
         p.setFirstName("name1");
@@ -59,6 +60,13 @@ public class setup implements CommandLineRunner {
 
         User u2 = userService.getUserById(1);
         logger.info(u2.toString());
-        */
+       
+
+        personservice.addPerson("name1", "name2", "name3",
+                "mail", "1234", "2345", "M", "456", "890");
+        Person p = personservice.getPersonById(1);
+        logger.info(p.toString());
+         */
+
     }
 }
