@@ -13,7 +13,7 @@ public class UserRowMapper implements RowMapper<User> {
     @Override
     public User mapRow(ResultSet rs, int rowNum) throws SQLException {
         User user = (new BeanPropertyRowMapper<>(User.class)).mapRow(rs,rowNum);
-        int personId = rs.getInt("person_id");
+        int personId = rs.getInt("personId");
         Person p = new Person();
         p.setId(personId);
         user.setPerson(p);
