@@ -30,4 +30,6 @@ public class User {
 
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private UserRole userRole;
+
+    //private Integer personId;
 }
