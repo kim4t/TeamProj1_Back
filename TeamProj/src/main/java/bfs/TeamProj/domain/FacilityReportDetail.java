@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Data
 @Entity
-@Table(name ="facility")
+@Table(name ="facilityReportDetail")
 public class FacilityReportDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,10 @@ public class FacilityReportDetail {
     @Column(name = "lastModificationDate", nullable = false, length = 250)
     private LocalDate lastModificationDate;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    //@OneToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "reportId")
+    //private FacilityReport facilityReport;
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "reportId")
     private FacilityReport facilityReport;
 

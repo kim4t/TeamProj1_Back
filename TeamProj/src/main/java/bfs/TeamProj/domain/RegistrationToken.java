@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Data
 @Entity
 @Table(name ="registrationToken")
@@ -16,7 +18,7 @@ public class RegistrationToken {
     @Column(name = "token", nullable = false, length = 250)
     private String token;
     @Column(name = "validDuration", nullable = false, length = 250)
-    private LocalDate validDuration;
+    private LocalDateTime validDuration;
     @Column(name = "email", nullable = false, length = 250)
     private String email;
     @Column(name = "createdBy", nullable = false, length = 250)
