@@ -13,11 +13,11 @@ public class PersonService {
 
     @Transactional
     public Integer addPerson(String firstName, String LastName, String midName, String email,
-                             String cell, String altPhone, String gender, String ssn, String dob){
+                             String cell, String altPhone, String gender, String ssn, String dob) {
         Person p = new Person();
         p.setFirstName(firstName);
         p.setLastName(LastName);
-        p.setMiddleName(midName);
+        //p.setMiddleName(midName);
         p.setEmail(email);
         p.setCellphone(cell);
         p.setAlternatePhone(altPhone);
@@ -26,8 +26,9 @@ public class PersonService {
         p.setDOB(dob);
         return personDao.addPerson(p);
     }
+
     @Transactional
     public Person getPersonById(int id) {
-        return null;
+        return personDao.getPersonById(id);
     }
 }
