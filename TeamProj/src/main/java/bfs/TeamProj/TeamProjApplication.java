@@ -10,7 +10,7 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.event.EventListener;
-
+import java.util.UUID;
 @SpringBootApplication
 public class TeamProjApplication {
 	@Autowired
@@ -22,11 +22,12 @@ public class TeamProjApplication {
 //		testService.foo("test",123);
 
 		SpringApplication.run(TeamProjApplication.class, args);
+
 	}
 
 	@EventListener(ApplicationReadyEvent.class)
 	public void triggerMail(){
-		emailSenderService.sendSimpleEmail("taetaehoKim@gmail.com","this is test","Hello!");
+		emailSenderService.sendSimpleEmail("taetaehoKim@gmail.com");
 
 	}
 
