@@ -1,5 +1,7 @@
 package bfs.TeamProj.config;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -10,7 +12,8 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 import javax.sql.DataSource;
-
+@Getter
+@Setter
 @Configuration
 @PropertySource("classpath:application.properties")
 @ComponentScan(basePackages = {"bfs.TeamProj"})
@@ -28,7 +31,7 @@ public class JdbcConfig {
     @Value("${database.jdbc.password}")
     private String jdbcPassword;
 
-    public String getJdbcDriver() {
+/*    public String getJdbcDriver() {
         return jdbcDriver;
     }
 
@@ -58,7 +61,7 @@ public class JdbcConfig {
 
     public void setJdbcPassword(String jdbcPassword) {
         this.jdbcPassword = jdbcPassword;
-    }
+    }*/
 
     @Bean
     public DataSource jdbcDataSource() {

@@ -9,7 +9,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 @SpringBootApplication
-@EnableAutoConfiguration
 public class TeamProjApplication {
 
 	public static void main(String[] args) {
@@ -19,6 +18,7 @@ public class TeamProjApplication {
 //		testService.foo("test",123);
 
 		SpringApplication.run(TeamProjApplication.class, args);
+
 	}
 
 }
