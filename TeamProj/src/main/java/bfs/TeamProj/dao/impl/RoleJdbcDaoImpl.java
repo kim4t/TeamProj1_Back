@@ -19,7 +19,7 @@ public class RoleJdbcDaoImpl implements RoleDao {
 
     private static final String GET_ROLE_BY_ID = "SELECT * FROM role WHERE id=?";
     private static final String GET_ALL_ROLE = "SELECT * FROM role";
-    private static final String INSERT_ROLE = "INSERT INTO role (create_date, description, last_modification_user, modification_date, role_name) " +
+    private static final String INSERT_ROLE = "INSERT INTO role (createDate, description, lastModificationUser, modificationDate, roleName) " +
             "VALUES (?, ?, ?, ?, ?)";
 
     @Override

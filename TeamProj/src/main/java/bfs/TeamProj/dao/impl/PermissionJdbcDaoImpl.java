@@ -17,7 +17,7 @@ import java.util.List;
 public class PermissionJdbcDaoImpl implements PermissionDao {
     private JdbcTemplate jdbcTemplate;
     private static final String GET_ALL_PERMISSION = "SELECT * FROM permission";
-    private static final String INSERT_PERMISSION = "INSERT INTO permission (create_date, last_modification_user, modification_date, permission_description, permission_name) " +
+    private static final String INSERT_PERMISSION = "INSERT INTO permission (createDate, lastModificationUser, modificationDate, permissionDescription, permissionName) " +
             "VALUES (?, ?, ?, ?, ?)";
 
     @Override

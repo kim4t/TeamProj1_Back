@@ -16,8 +16,8 @@ import java.util.List;
 @Repository("rolePermissionJdbcDao")
 public class RolePermissionJdbcImpl implements RolePermissionDao {
     private JdbcTemplate jdbcTemplate;
-    private static final String GET_ALL_ROLE_PERMISSION = "SELECT * FROM role_permission";
-    private static final String INSERT_ROLE_PERMISSION = "INSERT INTO role_permission (active_flag, create_date, last_modification_user, modification_date, permission_id, role_id) " +
+    private static final String GET_ALL_ROLE_PERMISSION = "SELECT * FROM rolePermission";
+    private static final String INSERT_ROLE_PERMISSION = "INSERT INTO rolePermission (activeFlag, createDate, lastModificationUser, modificationDate, permissionId, roleId) " +
             "VALUES (?, ?, ?, ?, ?)";
 
     @Override
