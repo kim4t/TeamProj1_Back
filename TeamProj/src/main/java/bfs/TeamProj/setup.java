@@ -1,15 +1,15 @@
 package bfs.TeamProj;
 
 import bfs.TeamProj.Service.PersonService;
-import bfs.TeamProj.Service.RegistrationTokenService;
 import bfs.TeamProj.Service.UserService;
+
 import bfs.TeamProj.Service.VisaStatusService;
 import bfs.TeamProj.domain.*;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -29,13 +29,15 @@ public class setup implements CommandLineRunner {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+
     private static final Logger logger = LoggerFactory.getLogger(setup.class);
 
     @Override
     public void run(String... args) throws Exception {
-        //cleanAlltable();
         dataSetUp();
+        //cleanAlltable();
     }
+
 
     //used to remove all table from database
     public void cleanAlltable() {
@@ -79,9 +81,16 @@ public class setup implements CommandLineRunner {
         token.setValidDuration(LocalDateTime.now());
         tokenService.addToken(token);
 
+
+    public void dataSetUp() {
+        logger.info("start to insert data");
+
+
+        /*
+
         Person p = new Person();
-        p.setFirstName("name123131");
-        p.setLastName("name22131");
+        p.setFirstName("name1");
+        p.setLastName("name2");
         p.setMiddleName("name3");
         p.setEmail("mail");
         p.setCellphone("1234");
@@ -89,8 +98,17 @@ public class setup implements CommandLineRunner {
         p.setGender("M");
         p.setSSN("456");
         p.setDOB("890");
+
         id = personService.addPerson(p);
         System.out.println("inserted id:" + id);
+
+        int id = personService.addPerson(p);
+
+        Person p2 = personService.getPersonById(4);
+        logger.info(p2.toString());
+
+
+
 
         User u = new User();
         u.setUserName("username1");
@@ -98,13 +116,16 @@ public class setup implements CommandLineRunner {
         u.setEmail("email1");
         u.setCreateDate(LocalDate.now());
         u.setModificationDate(LocalDate.now());
-        int userId = userService.addUser(u, id);
+        int userId = userService.addUser(u, 11);
         System.out.println("User id:" + userId);
+
 /*
         //Person p2 = personService.getPersonById(4);
         //logger.info(p2.toString());
         //User u2 = userService.getUserById(1);
         //logger.info(u2.toString());
+        User u2 = userService.getUserById(1);
+        logger.info(u2.toString());
         */
     }
 }

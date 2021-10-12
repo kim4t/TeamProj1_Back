@@ -1,9 +1,12 @@
 package bfs.TeamProj.domain;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
 import javax.persistence.*;
 
 @Data
+@RequiredArgsConstructor
 @Entity
 @Table(name = "person")
 public class Person {
