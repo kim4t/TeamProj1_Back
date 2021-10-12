@@ -1,6 +1,7 @@
 package bfs.TeamProj;
 
 import bfs.TeamProj.Service.PersonService;
+import bfs.TeamProj.Service.RegistrationTokenService;
 import bfs.TeamProj.Service.UserService;
 
 import bfs.TeamProj.Service.VisaStatusService;
@@ -10,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -81,13 +83,7 @@ public class setup implements CommandLineRunner {
         token.setValidDuration(LocalDateTime.now());
         tokenService.addToken(token);
 
-
-    public void dataSetUp() {
-        logger.info("start to insert data");
-
-
         /*
-
         Person p = new Person();
         p.setFirstName("name1");
         p.setLastName("name2");
@@ -106,10 +102,6 @@ public class setup implements CommandLineRunner {
 
         Person p2 = personService.getPersonById(4);
         logger.info(p2.toString());
-
-
-
-
         User u = new User();
         u.setUserName("username1");
         u.setPassword("password1");
@@ -118,8 +110,6 @@ public class setup implements CommandLineRunner {
         u.setModificationDate(LocalDate.now());
         int userId = userService.addUser(u, 11);
         System.out.println("User id:" + userId);
-
-/*
         //Person p2 = personService.getPersonById(4);
         //logger.info(p2.toString());
         //User u2 = userService.getUserById(1);
@@ -127,5 +117,6 @@ public class setup implements CommandLineRunner {
         User u2 = userService.getUserById(1);
         logger.info(u2.toString());
         */
+
     }
 }
