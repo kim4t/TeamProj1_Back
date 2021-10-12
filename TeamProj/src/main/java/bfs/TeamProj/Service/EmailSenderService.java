@@ -15,7 +15,7 @@ public class EmailSenderService {
 
     public void sendSimpleEmail(String toEmail){
         SimpleMailMessage message = new SimpleMailMessage();
-        String body = "http://localhost:4200/login/register?email"+toEmail+"&token="+generateString();
+        String body = "http://localhost:4200/login/register?email="+toEmail+"&token="+generateString();
         String subject = "BeaconFire - Link for register ";
         message.setFrom("taetaehokim@gmail.com");
         message.setTo(toEmail);
