@@ -1,9 +1,7 @@
 package bfs.TeamProj.Service;
 
-
-import bfs.TeamProj.dao.RoleDao;
+import bfs.TeamProj.dao.PermissionDao;
 import bfs.TeamProj.domain.Permission;
-import bfs.TeamProj.domain.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,17 +9,18 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class RoleService {
+public class PermissionService {
     @Autowired
-    private RoleDao roleDao;
+    private PermissionDao permissionDao;
 
     @Transactional
-    public Integer addRole(Role role) {
-        return roleDao.addRole(role);
+    public Integer addPermission(Permission permission) {
+        return permissionDao.addPermission(permission);
     }
 
     @Transactional
-    public List<Role> getAllRole() {
-        return roleDao.getAllRole();
+    public List<Permission> getAllSampleDocument() {
+        return permissionDao.getAllPermission();
     }
 }
+

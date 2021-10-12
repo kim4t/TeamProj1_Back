@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -28,6 +30,8 @@ public class FacilityReport {
     @JoinColumn(name = "employeeId")
     private Employee employee;
 
-    @OneToOne(mappedBy = "facilityReport")
-    private FacilityReportDetail facilityReportDetail;
+    //@OneToOne(mappedBy = "facilityReport")
+    //private FacilityReportDetail facilityReportDetail;
+    @OneToMany(mappedBy = "facilityReport")
+    private List<FacilityReportDetail> facilityReportDetailList = new ArrayList<>();
 }

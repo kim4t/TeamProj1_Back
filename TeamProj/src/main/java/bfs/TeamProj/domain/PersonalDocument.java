@@ -8,7 +8,7 @@ import java.time.LocalDate;
 
 @Data
 @Entity
-@Table(name ="facility")
+@Table(name ="personalDocument")
 public class PersonalDocument {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
