@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.ZoneOffset;
 import java.util.List;
 
 @Repository("registrationTokenJdbcDao")
@@ -29,7 +31,8 @@ public class RegistrationTokenDaoImpl implements RegistrationTokenDao {
             statement.setString(1, token.getCreatedBy());
             statement.setString(2, token.getEmail());
             statement.setString(3, token.getToken());
-            statement.setDate(4, Date.valueOf(token.getValidDuration()));
+            statement.setTimestamp(4, Timestamp.valueOf(token.getValidDuration()));
+
             return statement;
         }, holder);
         return holder.getKey().intValue();

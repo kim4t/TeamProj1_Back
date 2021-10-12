@@ -14,6 +14,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Component
 public class setup implements CommandLineRunner {
@@ -32,7 +33,7 @@ public class setup implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         //cleanAlltable();
-        dataSetUp();
+        //dataSetUp();
     }
 
     //used to remove all table from database
@@ -63,7 +64,7 @@ public class setup implements CommandLineRunner {
         token.setToken("test token");
         token.setCreatedBy("admin");
         token.setEmail("abc@1234");
-        token.setValidDuration(LocalDate.now());
+        token.setValidDuration(LocalDateTime.now());
         tokenService.addToken(token);
         /*
         Person p = new Person();

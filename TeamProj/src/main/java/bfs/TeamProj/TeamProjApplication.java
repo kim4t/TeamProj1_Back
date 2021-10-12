@@ -2,7 +2,9 @@ package bfs.TeamProj;
 
 
 import bfs.TeamProj.Service.EmailSenderService;
+import bfs.TeamProj.Service.RegistrationTokenService;
 import bfs.TeamProj.config.JdbcConfig;
+import bfs.TeamProj.domain.RegistrationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.SpringApplication;
@@ -21,9 +23,7 @@ public class TeamProjApplication {
 
 	public static void main(String[] args) {
 //		ApplicationContext context = new AnnotationConfigApplicationContext(JdbcConfig.class);
-//		TestService testService = context.getBean("testService", TestService.class);
-//		testService.foo("test",123);
-
+//		RegistrationTokenService registrationTokenService = context.getBean("testService", RegistrationTokenService.class);
 		SpringApplication.run(TeamProjApplication.class, args);
 
 	}
