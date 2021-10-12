@@ -1,7 +1,6 @@
 package bfs.TeamProj.dao.impl;
 
 import bfs.TeamProj.dao.UserDao;
-import bfs.TeamProj.dao.jdbcmapper.PersonRowMapper;
 import bfs.TeamProj.dao.jdbcmapper.UserRowMapper;
 import bfs.TeamProj.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ import java.sql.*;
 public class UserJdbcDaoImpl implements UserDao {
     private JdbcTemplate jdbcTemplate;
     private static final String GET_USER_BY_ID = "SELECT * FROM user WHERE id=?";
-    private static final String INSERT_USER = "INSERT INTO user (user_name, password, email, person_id, create_date, modification_date) " +
+    private static final String INSERT_USER = "INSERT INTO user (userName, password, email, personId, createDate, modificationDate) " +
             "VALUES (?, ?, ?, ?, ?, ?)";
 
     @Override

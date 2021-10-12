@@ -16,8 +16,8 @@ import java.util.List;
 public class DigitalDocumentDaoImpl implements DigitalDocumentDao {
     private JdbcTemplate jdbcTemplate;
 
-    private static final String GET_ALL_DIGITAL_DOC = "SELECT * FROM digital_document";
-    private static final String INSERT_DIGITAL_DOC = "INSERT INTO digital_document (required, description, template_location, type) " +
+    private static final String GET_ALL_DIGITAL_DOC = "SELECT * FROM digitalDocument";
+    private static final String INSERT_DIGITAL_DOC = "INSERT INTO digitalDocument (Required, description, templateLocation, type) " +
             "VALUES (?, ?, ?, ?)";
 
     @Override

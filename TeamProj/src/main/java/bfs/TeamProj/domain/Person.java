@@ -44,4 +44,5 @@ public class Person {
 
     @OneToOne(mappedBy = "person", fetch = FetchType.LAZY)
     private User user;
+
 }

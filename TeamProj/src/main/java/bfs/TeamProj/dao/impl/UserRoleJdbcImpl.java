@@ -16,8 +16,8 @@ import java.util.List;
 @Repository("userRoleJdbcDao")
 public class UserRoleJdbcImpl implements UserRoleDao {
     private JdbcTemplate jdbcTemplate;
-    private static final String GET_ALL_USER_ROLE = "SELECT * FROM user_role";
-    private static final String INSERT_USER_ROLE = "INSERT INTO user_role (active_flag, last_modification_user, modification_date, user_id, role_id) " +
+    private static final String GET_ALL_USER_ROLE = "SELECT * FROM userRole";
+    private static final String INSERT_USER_ROLE = "INSERT INTO userRole (activeFlag, lastModificationUser, modificationDate, userId, roleId) " +
             "VALUES (?, ?, ?, ?, ?)";
 
     @Override

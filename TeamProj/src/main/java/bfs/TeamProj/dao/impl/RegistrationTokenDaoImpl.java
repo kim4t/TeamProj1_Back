@@ -11,14 +11,17 @@ import org.springframework.stereotype.Repository;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.ZoneOffset;
 import java.util.List;
 
 @Repository("registrationTokenJdbcDao")
 public class RegistrationTokenDaoImpl implements RegistrationTokenDao {
     private JdbcTemplate jdbcTemplate;
 
-    private static final String GET_ALL_TOKEN = "SELECT * FROM registration_token";
-    private static final String INSERT_TOKEN = "INSERT INTO registration_token (created_by, email, token, valid_duration) " +
+    private static final String GET_ALL_TOKEN = "SELECT * FROM registrationToken";
+    private static final String INSERT_TOKEN = "INSERT INTO registrationToken (createdBy, email, token, validDuration) " +
             "VALUES (?, ?, ?, ?)";
 
     @Override
@@ -29,7 +32,7 @@ public class RegistrationTokenDaoImpl implements RegistrationTokenDao {
             statement.setString(1, token.getCreatedBy());
             statement.setString(2, token.getEmail());
             statement.setString(3, token.getToken());
-            statement.setDate(4, Date.valueOf(token.getValidDuration()));
+            statement.setTimestamp(4, Timestamp.valueOf(token.getValidDuration()));
             return statement;
         }, holder);
         return holder.getKey().intValue();

@@ -17,7 +17,7 @@ public class PersonJdbcDaoImpl implements PersonDao {
     private JdbcTemplate jdbcTemplate;
 
     private static final String GET_PERSON_BY_ID = "SELECT * FROM person WHERE id=?";
-    private static final String INSERT_PERSON = "INSERT INTO person (first_Name, last_Name, middle_Name, email, cellphone, alternate_Phone, gender, SSN, DOB) " +
+    private static final String INSERT_PERSON = "INSERT INTO person (firstName, lastName, middleName, email, cellphone, alternatePhone, gender, SSN, DOB) " +
             "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     @Override
@@ -29,13 +29,6 @@ public class PersonJdbcDaoImpl implements PersonDao {
 
     @Override
     public Integer addPerson(Person person) {
-        /*
-        return jdbcTemplate.update(INSERT_PERSON,
-                person.getFirstName(), person.getLastName(), person.getMiddleName(),
-                person.getEmail(), person.getCellphone(), person.getAlternatePhone(),
-                person.getGender(), person.getSSN(), person.getDOB());
-
-        */
         GeneratedKeyHolder holder = new GeneratedKeyHolder();
         jdbcTemplate.update(con -> {
             PreparedStatement statement = con.prepareStatement(INSERT_PERSON, Statement.RETURN_GENERATED_KEYS);
