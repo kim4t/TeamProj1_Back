@@ -19,7 +19,7 @@ public class DigitalDocument {
     @Column(name = "Required", nullable = false)
     private Boolean Required;
     @Column(name = "templateLocation", nullable = false, length = 250)
-    private LocalDate templateLocation;
+    private String templateLocation;
     @Column(name = "description", nullable = false, length = 250)
     private String description;
 }
