@@ -23,7 +23,7 @@ public class setup implements CommandLineRunner {
 
         personservice.addPerson("name1", "name2", "name3",
                 "mail", "1234", "2345", "M", "456", "890");
-        Person p = personservice.getPersonById(4);
+        Person p = personservice.getPersonById(1);
         logger.info(p.toString());
     }
 }

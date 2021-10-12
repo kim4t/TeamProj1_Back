@@ -1,7 +1,7 @@
 package bfs.TeamProj.security.filter;
 
-import com.bfs.restdemo.constant.Constant;
-import com.bfs.restdemo.security.util.JwtUtil;
+import bfs.TeamProj.constant.Constant;
+import bfs.TeamProj.security.util.JwtUtil;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
