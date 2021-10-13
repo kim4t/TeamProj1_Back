@@ -25,10 +25,7 @@ public class TeamProjApplication {
 
 	}
 
-	@EventListener(ApplicationReadyEvent.class)
-	public void triggerMail(){
-		emailSenderService.sendSimpleEmail("taetaehoKim@gmail.com");
 
-	}
+
 
 }

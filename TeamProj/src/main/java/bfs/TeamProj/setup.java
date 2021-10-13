@@ -66,9 +66,9 @@ public class setup implements CommandLineRunner {
 
     public void dataSetUp() {
         logger.info("start to insert data");
-        User u = userService.getUserById(2);
+        User u = userService.getUserByEmail("email1");
 
-        System.out.println();
+        System.out.println(u.getUserName());
         //System.out.println(tokenService.getAllToken().toString());
 
 /*        VisaStatus v = new VisaStatus();
