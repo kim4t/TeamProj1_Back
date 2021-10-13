@@ -1,10 +1,7 @@
 package bfs.TeamProj;
 
-import bfs.TeamProj.Service.PersonService;
-import bfs.TeamProj.Service.RegistrationTokenService;
-import bfs.TeamProj.Service.UserService;
+import bfs.TeamProj.Service.*;
 
-import bfs.TeamProj.Service.VisaStatusService;
 import bfs.TeamProj.domain.*;
 
 import org.slf4j.Logger;
@@ -27,6 +24,10 @@ public class setup implements CommandLineRunner {
     private RegistrationTokenService tokenService;
     @Autowired
     private VisaStatusService visaStatusService;
+    @Autowired
+    private RoleService roleService;
+    @Autowired
+    private PermissionService permissionService;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -65,8 +66,12 @@ public class setup implements CommandLineRunner {
 
     public void dataSetUp() {
         logger.info("start to insert data");
+        User u = userService.getUserById(2);
 
-        VisaStatus v = new VisaStatus();
+        System.out.println();
+        //System.out.println(tokenService.getAllToken().toString());
+
+/*        VisaStatus v = new VisaStatus();
         v.setActive(true);
         v.setCreateUser("admin");
         v.setModificationDate(LocalDate.now());
@@ -74,16 +79,6 @@ public class setup implements CommandLineRunner {
         int id = visaStatusService.addVisaStatus(v);
         System.out.println("id: " + id);
         System.out.println(visaStatusService.getVisaStatusById(id).toString());
-
-
-        RegistrationToken token = new RegistrationToken();
-        token.setToken("test token");
-        token.setCreatedBy("admin");
-        token.setEmail("abc@1234");
-        token.setValidDuration(LocalDateTime.now());
-        tokenService.addToken(token);
-
-        /*
         Person p = new Person();
         p.setFirstName("name1");
         p.setLastName("name2");
@@ -94,26 +89,91 @@ public class setup implements CommandLineRunner {
         p.setGender("M");
         p.setSSN("456");
         p.setDOB("890");
-
-        id = personService.addPerson(p);
-        System.out.println("inserted id:" + id);
-
         int id = personService.addPerson(p);
+        p.setId(id);
 
-        Person p2 = personService.getPersonById(4);
-        logger.info(p2.toString());
         User u = new User();
         u.setUserName("username1");
         u.setPassword("password1");
         u.setEmail("email1");
         u.setCreateDate(LocalDate.now());
         u.setModificationDate(LocalDate.now());
-        int userId = userService.addUser(u, 11);
+        u.setPerson(p);
+        int userId = userService.addUser(u);
         System.out.println("User id:" + userId);
-        //Person p2 = personService.getPersonById(4);
-        //logger.info(p2.toString());
-        //User u2 = userService.getUserById(1);
-        //logger.info(u2.toString());
+
+        Permission permission = new Permission();
+        RolePermission rolePermission = new RolePermission();
+        Role role = new Role();
+        permission.setCreateDate(LocalDate.now());
+        permission.setLastModificationUser("admin");
+        permission.setModificationDate(LocalDate.now());
+        permission.setPermissionDescription("admin permission");
+        permission.setPermissionName("admin");
+
+        rolePermission.setActiveFlag(true);
+        rolePermission.setCreateDate(LocalDate.now());
+        rolePermission.setLastModificationUser("admin");
+        rolePermission.setModificationDate(LocalDate.now());
+
+
+        role.setCreateDate(LocalDate.now());
+        role.setDescription("role for HR");
+        role.setLastModificationUser("admin");
+        role.setModificationDate(LocalDate.now());
+        role.setRoleName("HR");
+
+        rolePermission.setRole(role);
+        rolePermission.setPermission(permissionService.getPermissionById(1));
+        role.setRolePermission(rolePermission);
+        permission.setRolePermission(rolePermission);
+
+        //permissionService.addPermission(permission);
+        roleService.addRole(role);
+        //System.out.println("id:" + id);
+
+
+
+        VisaStatus v = new VisaStatus();
+        v.setActive(true);
+        v.setCreateUser("admin");
+        v.setModificationDate(LocalDate.now());
+        v.setVisaType("OPT");
+        int id = visaStatusService.addVisaStatus(v);
+        System.out.println("id: " + id);
+        System.out.println(visaStatusService.getVisaStatusById(id).toString());
+
+        RegistrationToken token = new RegistrationToken();
+        token.setToken("test token");
+        token.setCreatedBy("admin");
+        token.setEmail("abc@1234");
+        token.setValidDuration(LocalDateTime.now());
+        tokenService.addToken(token);
+
+        Person p = new Person();
+        p.setFirstName("name1");
+        p.setLastName("name2");
+        p.setMiddleName("name3");
+        p.setEmail("mail");
+        p.setCellphone("1234");
+        p.setAlternatePhone("2345");
+        p.setGender("M");
+        p.setSSN("456");
+        p.setDOB("890");
+        id = personService.addPerson(p);
+        System.out.println("inserted id:" + id);
+        Person p2 = personService.getPersonById(id);
+        logger.info(p2.toString());
+
+        User u = new User();
+        u.setUserName("username1");
+        u.setPassword("password1");
+        u.setEmail("email1");
+        u.setCreateDate(LocalDate.now());
+        u.setModificationDate(LocalDate.now());
+        int userId = userService.addUser(u, id);
+        System.out.println("User id:" + userId);
+
         User u2 = userService.getUserById(1);
         logger.info(u2.toString());
         */

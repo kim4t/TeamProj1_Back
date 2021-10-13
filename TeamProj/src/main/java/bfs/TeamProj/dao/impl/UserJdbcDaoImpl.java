@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 
-@Repository("userJdbcDao")
 public class UserJdbcDaoImpl implements UserDao {
     private JdbcTemplate jdbcTemplate;
     private static final String GET_USER_BY_ID = "SELECT * FROM user WHERE id=?";
@@ -26,14 +25,14 @@ public class UserJdbcDaoImpl implements UserDao {
     }
 
     @Override
-    public Integer addUser(User user, int personId) {
+    public Integer addUser(User user) {
         GeneratedKeyHolder holder = new GeneratedKeyHolder();
         jdbcTemplate.update(con -> {
             PreparedStatement statement = con.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, user.getUserName());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getEmail());
-            statement.setInt(4, personId);
+            statement.setInt(4, 1);
             statement.setDate(5, Date.valueOf(user.getCreateDate()));
             statement.setDate(6, Date.valueOf(user.getModificationDate()));
             return statement;

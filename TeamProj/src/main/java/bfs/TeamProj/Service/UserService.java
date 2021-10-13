@@ -17,18 +17,16 @@ public class UserService {
 
     @Transactional
     public Integer addUser(User user, int personId) {
-        return userDao.addUser(user, personId);
+        return userDao.addUser(user);
     }
 
     @Transactional
     public Integer addUser(User user) {
-        int personId = user.getPerson().getId();
-        return userDao.addUser(user, personId);
+        return userDao.addUser(user);
     }
     @Transactional
     public User getUserById(int id) {
         User u = userDao.getUserById(id);
-        //u.setPerson(personDao.getPersonById(u.getPerson().getId()));
         return u;
     }
 }
