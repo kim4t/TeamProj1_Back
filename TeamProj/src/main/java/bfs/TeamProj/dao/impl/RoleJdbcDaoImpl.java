@@ -13,7 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 
-@Repository("roleJdbcDao")
+//@Repository("roleJdbcDao")
 public class RoleJdbcDaoImpl implements RoleDao {
     private JdbcTemplate jdbcTemplate;
 

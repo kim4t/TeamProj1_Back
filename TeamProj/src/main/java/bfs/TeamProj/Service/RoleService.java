@@ -12,7 +12,6 @@ import java.util.List;
 
 @Service
 public class RoleService {
-    @Autowired
     private RoleDao roleDao;
 
     @Transactional
@@ -23,5 +22,14 @@ public class RoleService {
     @Transactional
     public List<Role> getAllRole() {
         return roleDao.getAllRole();
+    }
+
+    @Transactional
+    public Role getRoleById(int id) {
+        return roleDao.getRoleById(id);
+    }
+    @Autowired
+    public void setRoleDao(RoleDao roleDao) {
+        this.roleDao = roleDao;
     }
 }

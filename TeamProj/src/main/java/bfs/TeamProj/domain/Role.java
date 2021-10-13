@@ -3,11 +3,13 @@ package bfs.TeamProj.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
+
 @Data
 @Entity
 @Table(name = "role")
-public class Role {
+public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
@@ -25,7 +27,7 @@ public class Role {
 
     @OneToOne(mappedBy = "role")
     private UserRole userRole;
-    @OneToOne(mappedBy = "role")
+    @OneToOne(mappedBy = "role", cascade = CascadeType.PERSIST)
     private RolePermission rolePermission;
 }
 

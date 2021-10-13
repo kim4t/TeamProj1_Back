@@ -28,7 +28,7 @@ public class UserService {
     @Transactional
     public User getUserById(int id) {
         User u = userDao.getUserById(id);
-        u.setPerson(personDao.getPersonById(u.getPerson().getId()));
+        //u.setPerson(personDao.getPersonById(u.getPerson().getId()));
         return u;
     }
 }

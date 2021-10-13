@@ -13,7 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 
-@Repository("permissionJdbcDao")
+//@Repository("permissionJdbcDao")
 public class PermissionJdbcDaoImpl implements PermissionDao {
     private JdbcTemplate jdbcTemplate;
     private static final String GET_ALL_PERMISSION = "SELECT * FROM permission";
@@ -38,6 +38,11 @@ public class PermissionJdbcDaoImpl implements PermissionDao {
     @Override
     public List<Permission> getAllPermission() {
         return jdbcTemplate.query(GET_ALL_PERMISSION, new BeanPropertyRowMapper<>(Permission.class));
+    }
+
+    @Override
+    public Permission getPermissionById(int id) {
+        return null;
     }
 
     @Autowired
