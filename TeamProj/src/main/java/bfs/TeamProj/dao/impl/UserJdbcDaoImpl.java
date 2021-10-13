@@ -25,6 +25,11 @@ public class UserJdbcDaoImpl implements UserDao {
     }
 
     @Override
+    public User getUserByEmail(String email) {
+        return null;
+    }
+
+    @Override
     public Integer addUser(User user) {
         GeneratedKeyHolder holder = new GeneratedKeyHolder();
         jdbcTemplate.update(con -> {

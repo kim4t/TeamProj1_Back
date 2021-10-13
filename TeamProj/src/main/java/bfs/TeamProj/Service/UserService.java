@@ -24,9 +24,16 @@ public class UserService {
     public Integer addUser(User user) {
         return userDao.addUser(user);
     }
+
     @Transactional
     public User getUserById(int id) {
         User u = userDao.getUserById(id);
+        return u;
+    }
+
+    @Transactional
+    public User getUserByEmail(String email) {
+        User u = userDao.getUserByEmail(email);
         return u;
     }
 }
