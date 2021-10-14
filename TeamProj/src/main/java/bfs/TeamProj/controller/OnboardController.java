@@ -1,8 +1,6 @@
 package bfs.TeamProj.controller;
 
 import bfs.TeamProj.Service.*;
-import bfs.TeamProj.dao.ContactDao;
-import bfs.TeamProj.dao.PersonalDocumentDao;
 import bfs.TeamProj.domain.*;
 import bfs.TeamProj.constant.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,15 +34,18 @@ public class OnboardController {
     @Autowired
     private ApplicationWorkFlowService applicationWorkFlowService;
     @Autowired
-    private PersonalDocumentDao personalDocumentDao;
+    private PersonalDocumentService personalDocumentService;
     @Autowired
-    private ContactDao contactDao;
+    private ContactService contactService;
 
     @PostMapping
-    public Person getEmail(HttpServletRequest request) {
+    public String onBoard(HttpServletRequest request) {
 
         String email = request.getParameter("email");
         User u = userService.getUserByEmail(email);
+        if (u == null) {
+            return "error email";
+        }
 
         //Set the role of this user (Done)
         Role role = roleService.getRoleByName("employee");
@@ -134,7 +135,7 @@ public class OnboardController {
             dLDoc.setPath(request.getParameter("driverLicenseDocumentPath"));
             dLDoc.setTitle("Driver License file");
             dLDoc.setEmployee(emp);
-            personalDocumentDao.addPersonalDocument(dLDoc);
+            personalDocumentService.addPersonalDocument(dLDoc);
         }
         //personal document for work authorization
         if (!(visaType.equals("Green Card") || visaType.equals("Citizen"))) {
@@ -145,11 +146,11 @@ public class OnboardController {
             workAuthDoc.setPath(request.getParameter("visaDocumentPath"));
             workAuthDoc.setTitle("work authorization file");
             workAuthDoc.setEmployee(emp);
-            personalDocumentDao.addPersonalDocument(workAuthDoc);
+            personalDocumentService.addPersonalDocument(workAuthDoc);
         }
 
         //add the reference person if exist
-        if(request.getParameter("firstNameRef")!= null) {
+        if (request.getParameter("firstNameRef") != null) {
             Person referencePerson = new Person();
             referencePerson.setFirstName(request.getParameter("firstNameRef"));
             referencePerson.setLastName(request.getParameter("lastNameRef"));
@@ -169,7 +170,7 @@ public class OnboardController {
             contact.setRelationship(request.getParameter("relationshipRef"));
             contact.setTitle("reference");
             contact.setPerson2(p);
-            contactDao.addContact(contact);
+            contactService.addContact(contact);
 
             Address referenceAddress = new Address();
             referenceAddress.setPerson(referencePerson);
@@ -181,10 +182,10 @@ public class OnboardController {
             referenceAddress.setZipCode(request.getParameter("zipCodeRef"));
             addressService.addAddress(referenceAddress);
         }
-        
+
         //add the emergency contact list
         int emergencyCount = Integer.parseInt(request.getParameter("emergencyContactNumber"));
-        for(int i = 0; i < emergencyCount; i++) {
+        for (int i = 0; i < emergencyCount; i++) {
             Person person = new Person();
             person.setFirstName(request.getParameter("firstNameEmg" + i));
             person.setLastName(request.getParameter("lastNameEmg" + i));
@@ -204,8 +205,8 @@ public class OnboardController {
             contact.setRelationship(request.getParameter("relationshipEmg" + i));
             contact.setTitle("emergency");
             contact.setPerson2(p);
-            contactDao.addContact(contact);
+            contactService.addContact(contact);
         }
-        return p;
+        return "done";
     }
 }
