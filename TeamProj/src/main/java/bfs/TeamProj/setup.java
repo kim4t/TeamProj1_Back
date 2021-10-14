@@ -68,7 +68,124 @@ public class setup implements CommandLineRunner {
 
     public void dataSetUp() {
         logger.info("start to insert data");
-       Optional<RegistrationToken> token = tokenService.getAllToken().stream().filter(c->c.getToken().equals("test token")).findAny();
+
+
+        //set up HR role and permission
+        Permission permission = new Permission();
+        Role role = new Role();
+        RolePermission rolePermission = new RolePermission();
+        if (roleService.getRoleByName("HR") == null) {
+            //for HR
+            permission.setCreateDate(LocalDate.now());
+            permission.setLastModificationUser("admin");
+            permission.setModificationDate(LocalDate.now());
+            permission.setPermissionDescription("admin permission");
+            permission.setPermissionName("admin");
+            permission = permissionService.addPermission(permission);
+
+            role.setCreateDate(LocalDate.now());
+            role.setDescription("role for HR");
+            role.setLastModificationUser("admin");
+            role.setModificationDate(LocalDate.now());
+            role.setRoleName("HR");
+            role = roleService.addRole(role);
+
+            rolePermission.setActiveFlag(true);
+            rolePermission.setCreateDate(LocalDate.now());
+            rolePermission.setLastModificationUser("admin");
+            rolePermission.setModificationDate(LocalDate.now());
+            rolePermission.setRole(role);
+            rolePermission.setPermission(permission);
+            permissionService.addRolePermission(rolePermission);
+        }
+        if(roleService.getRoleByName("employee") == null) {
+            //For employee
+            permission = new Permission();
+            permission.setCreateDate(LocalDate.now());
+            permission.setLastModificationUser("employee");
+            permission.setModificationDate(LocalDate.now());
+            permission.setPermissionDescription("employee permission");
+            permission.setPermissionName("employee");
+            permission = permissionService.addPermission(permission);
+
+            role = new Role();
+            role.setCreateDate(LocalDate.now());
+            role.setDescription("role for employee");
+            role.setLastModificationUser("admin");
+            role.setModificationDate(LocalDate.now());
+            role.setRoleName("employee");
+            role = roleService.addRole(role);
+
+            rolePermission = new RolePermission();
+            rolePermission.setActiveFlag(true);
+            rolePermission.setCreateDate(LocalDate.now());
+            rolePermission.setLastModificationUser("admin");
+            rolePermission.setModificationDate(LocalDate.now());
+            rolePermission.setRole(role);
+            rolePermission.setPermission(permission);
+            permissionService.addRolePermission(rolePermission);
+        }
+
+
+
+
+/*
+
+        User u = new User();
+        u.setUserName("bruceshen");
+        u.setPassword("password123");
+        u.setEmail("email1@gmail.com");
+        u.setCreateDate(LocalDate.now());
+        u.setModificationDate(LocalDate.now());
+        userService.addUser(u);
+        u = userService.getUserByEmail("email1@gmail.com");
+
+        Person p = new Person();
+        p.setFirstName("Xianli");
+        p.setLastName("Shen");
+        p.setEmail("email1@gmail.com");
+        p.setCellphone("12342313");
+        p.setGender("M");
+        p.setSSN("45643242");
+        p.setDOB("890423423");
+        p = personService.addPerson(p);
+
+        u.setPerson(p);
+        u = userService.updateUser(u);
+
+
+      Person p = new Person();
+        p.setFirstName("name1");
+        p.setLastName("name2");
+        p.setMiddleName("name3");
+        p.setEmail("mail");
+        p.setCellphone("1234");
+        p.setAlternatePhone("2345");
+        p.setGender("M");
+        p.setSSN("456");
+        p.setDOB("890");
+        p = personService.addPerson(p);
+        User u = new User();
+        u.setUserName("username1");
+        u.setPassword("password1");
+        u.setEmail("email1");
+        u.setCreateDate(LocalDate.now());
+        u.setModificationDate(LocalDate.now());
+        u.setPerson(p);
+        u = userService.addUser(u);
+        System.out.println(u.toString());*/
+        //User u = userService.getUserById(7);
+        //u.setPerson(personService.getPersonById(u.getPerson().getId()));
+        //System.out.println(u.toString());
+        //System.out.println(u.getPerson().getId());
+        //System.out.println(u.getPerson().getFirstName());
+        //System.out.println(u.getPerson().getLastName());
+        //System.out.println(u);
+
+
+
+
+       /*Optional<RegistrationToken> token = tokenService.getAllToken().stream().filter(c->c.getToken().equals("test token")).findAny();
 
        if(token.isPresent()){
            System.out.println(token.get().getToken());

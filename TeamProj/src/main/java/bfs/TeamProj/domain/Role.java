@@ -27,7 +27,7 @@ public class Role implements Serializable {
 
     @OneToOne(mappedBy = "role")
     private UserRole userRole;
-    @OneToOne(mappedBy = "role", cascade = CascadeType.PERSIST)
+    @OneToOne(mappedBy = "role")
     private RolePermission rolePermission;
 }
 

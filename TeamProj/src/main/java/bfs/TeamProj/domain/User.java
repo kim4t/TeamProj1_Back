@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+
 @Data
 @Entity
 @Table(name = "user")
@@ -32,4 +33,15 @@ public class User implements Serializable {
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private UserRole userRole;
 
+    @Override
+    public String toString() {
+        return String.format("%s(id=%d, name='%s', email=%s, password=%s, createDate=%s, personId=%s)",
+                this.getClass().getSimpleName(),
+                this.getId(),
+                this.getUserName(),
+                this.getEmail(),
+                this.getPassword(),
+                this.getCreateDate(),
+                this.getPerson() == null ? "no person" : this.getPerson().getId());
+    }
 }

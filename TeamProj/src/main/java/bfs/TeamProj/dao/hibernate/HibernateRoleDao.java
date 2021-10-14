@@ -27,4 +27,9 @@ public class HibernateRoleDao extends AbstractHibernateDAO<Role> implements Role
     public Role addRole(Role role) {
         return create(role);
     }
+
+    @Override
+    public Role getRoleByName(String name) {
+        return findByField("roleName", name);
+    }
 }

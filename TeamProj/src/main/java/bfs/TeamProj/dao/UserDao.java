@@ -8,4 +8,6 @@ public interface UserDao {
     User getUserByEmail(String email);
 
     User addUser(User user);
+
+    User updateUser(User user);
 }

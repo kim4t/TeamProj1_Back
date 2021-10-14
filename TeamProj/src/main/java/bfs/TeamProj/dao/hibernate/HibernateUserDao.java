@@ -24,4 +24,9 @@ public class HibernateUserDao extends AbstractHibernateDAO<User> implements User
     public User addUser(User user) {
         return create(user);
     }
+
+    @Override
+    public User updateUser(User user) {
+        return update(user);
+    }
 }

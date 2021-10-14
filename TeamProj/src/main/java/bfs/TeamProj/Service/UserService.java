@@ -28,4 +28,9 @@ public class UserService {
     public User getUserByEmail(String email) {
         return userDao.getUserByEmail(email);
     }
+
+    @Transactional
+    public User updateUser(User user) {
+        return userDao.updateUser(user);
+    }
 }
