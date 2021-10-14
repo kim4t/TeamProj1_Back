@@ -27,14 +27,13 @@ public class OnboardController {
     private RoleService roleService;
 
 
-
-
     @PostMapping
     public Person getEmail(HttpServletRequest request) {
 
         String email = request.getParameter("email");
         User u = userService.getUserByEmail(email);
 
+        //Set the role of this user (Done)
         Role role = roleService.getRoleByName("employee");
         UserRole userRole = new UserRole();
         userRole.setRole(role);
@@ -44,7 +43,7 @@ public class OnboardController {
         userRole.setModificationDate(LocalDate.now());
         roleService.addUserRole(userRole);
 
-
+        //user person information (Done)
         Person p = new Person();
         p.setFirstName(request.getParameter("firstName"));
         p.setLastName(request.getParameter("lastName"));
@@ -57,31 +56,40 @@ public class OnboardController {
         p.setSSN(request.getParameter("SSN"));
         p = personService.addPerson(p);
 
-        //insert personId to user
+        //update user with personId (Done)
         u.setPerson(p);
         u = userService.updateUser(u);
 
+        //add user's contact information
         Contact employeeContact = new Contact();
         employeeContact.setPerson(p);
+        //contactService.addContact
 
-
+        //add user's address information
         Address employeeAddress = new Address();
         employeeAddress.setPerson(p);
 
-
+        //add user's visaStatus information
         VisaStatus visaStatus = new VisaStatus();
         Employee emp = new Employee();
 
+        //add user's application work flow information
         ApplicationWorkFlow aWF = new ApplicationWorkFlow();
         List<PersonalDocument> documents = new ArrayList<>();
 
 
+        //add the reference person if exist
         Person referencePerson = new Person();
         Contact referenceContact = new Contact();
         Address referenceAddress = new Address();
 
-        List<Person> emergencyPerson = new ArrayList<>();
-        List<Contact> emergencyContact = new ArrayList<>();
+
+        //add the emergency contact list
+        List<Person> emergencyPersons = new ArrayList<>();
+        List<Contact> emergencyContacts = new ArrayList<>();
+
+        //personal documents
+        List<PersonalDocument> docs = new ArrayList<>();
 
 
         return p;
