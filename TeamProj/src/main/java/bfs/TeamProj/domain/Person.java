@@ -49,4 +49,6 @@ public class Person implements Serializable {
     @OneToOne(mappedBy = "person", fetch = FetchType.LAZY)
     private User user;
 
+
+
 }

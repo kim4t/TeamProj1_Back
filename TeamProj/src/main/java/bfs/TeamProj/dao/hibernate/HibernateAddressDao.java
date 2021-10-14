@@ -27,4 +27,9 @@ public class HibernateAddressDao extends AbstractHibernateDAO<Address> implement
     public Address getAddressById(int id) {
         return findById(id);
     }
+
+    @Override
+    public Address getAddressByPersonId(int personId) {
+        return findByField("personId", personId);
+    }
 }

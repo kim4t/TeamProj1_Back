@@ -11,7 +11,7 @@ public class VisaStatusService {
     private VisaStatusDao visaStatusDao;
 
     @Transactional
-    public int addVisaStatus(VisaStatus visaStatus) {
+    public VisaStatus addVisaStatus(VisaStatus visaStatus) {
         return visaStatusDao.addVisaStatus(visaStatus);
     }
 

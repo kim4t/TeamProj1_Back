@@ -10,4 +10,6 @@ public interface ContactDao {
     List<Contact> getAllContact();
 
     Contact getContactById(int id);
+
+    List<Contact> getContactsByRefPersonId(int personId);
 }

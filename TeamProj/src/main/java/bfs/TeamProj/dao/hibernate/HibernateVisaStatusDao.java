@@ -17,7 +17,7 @@ public class HibernateVisaStatusDao extends AbstractHibernateDAO<VisaStatus> imp
     }
 
     @Override
-    public Integer addVisaStatus(VisaStatus visaStatus) {
-        return create(visaStatus).getId();
+    public VisaStatus addVisaStatus(VisaStatus visaStatus) {
+        return create(visaStatus);
     }
 }

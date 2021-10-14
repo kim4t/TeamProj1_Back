@@ -8,9 +8,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class HibernateApplicationWorkFlowDao extends AbstractHibernateDAO<ApplicationWorkFlow> implements ApplicationWorkFlowDao {
 
-    public HibernateApplicationWorkFlowDao(){
+    public HibernateApplicationWorkFlowDao() {
         setClazz(ApplicationWorkFlow.class);
     }
+
     @Override
     public ApplicationWorkFlow getApplicationWorkFlowById(int id) {
         return findById(id);
@@ -19,5 +20,10 @@ public class HibernateApplicationWorkFlowDao extends AbstractHibernateDAO<Applic
     @Override
     public ApplicationWorkFlow addApplicationWorkFlow(ApplicationWorkFlow applicationWorkFlow) {
         return create(applicationWorkFlow);
+    }
+
+    @Override
+    public ApplicationWorkFlow getApplicationWorkFlowByEmployeeId(int employeeId) {
+        return findByField("employeeId", employeeId);
     }
 }

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("login")
+@CrossOrigin(origins = "http://localhost:4200")
 @Data
 public class RegisterController {
     @Autowired

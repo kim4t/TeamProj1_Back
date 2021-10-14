@@ -10,4 +10,6 @@ public interface AddressDao {
     List<Address> getAllAddress();
 
     Address getAddressById(int id);
+
+    Address getAddressByPersonId(int personId);
 }
