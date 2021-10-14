@@ -19,6 +19,11 @@ public class RegistrationTokenService {
     }
 
     @Transactional
+    public RegistrationToken getRegistrationTokenByName(String token){
+        return tokenDao.getRegistrationTokenByToken(token);
+    }
+
+    @Transactional
     public List<RegistrationToken> getAllToken() {
         return tokenDao.getAllRegistrationToken();
     }

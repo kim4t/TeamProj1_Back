@@ -15,11 +15,12 @@ import java.sql.Timestamp;
 import java.time.ZoneOffset;
 import java.util.List;
 
-@Repository("registrationTokenJdbcDao")
+//@Repository("registrationTokenJdbcDao")
 public class RegistrationTokenDaoImpl implements RegistrationTokenDao {
     private JdbcTemplate jdbcTemplate;
 
     private static final String GET_ALL_TOKEN = "SELECT * FROM registrationToken";
+    private static final String GET_TOKEN_BY_TOKEN = "SELECT * FROM registrationToken WHERE token=?";
     private static final String INSERT_TOKEN = "INSERT INTO registrationToken (createdBy, email, token, validDuration) " +
             "VALUES (?, ?, ?, ?)";
 
@@ -35,6 +36,11 @@ public class RegistrationTokenDaoImpl implements RegistrationTokenDao {
             return statement;
         }, holder);
         return holder.getKey().intValue();
+    }
+
+    @Override
+    public RegistrationToken getRegistrationTokenByToken(String name) {
+        return jdbcTemplate.queryForObject(GET_TOKEN_BY_TOKEN, new BeanPropertyRowMapper<>(RegistrationToken.class));
     }
 
     @Override

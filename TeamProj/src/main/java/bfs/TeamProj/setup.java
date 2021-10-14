@@ -13,6 +13,8 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 @Component
 public class setup implements CommandLineRunner {
@@ -66,9 +68,11 @@ public class setup implements CommandLineRunner {
 
     public void dataSetUp() {
         logger.info("start to insert data");
-        User u = userService.getUserByEmail("email1");
+       Optional<RegistrationToken> token = tokenService.getAllToken().stream().filter(c->c.getToken().equals("test token")).findAny();
 
-        System.out.println(u.getUserName());
+       if(token.isPresent()){
+           System.out.println(token.get().getToken());
+       }
         //System.out.println(tokenService.getAllToken().toString());
 
 /*        VisaStatus v = new VisaStatus();
