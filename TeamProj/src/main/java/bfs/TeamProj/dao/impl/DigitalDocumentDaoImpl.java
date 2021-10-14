@@ -1,4 +1,4 @@
-package bfs.TeamProj.dao.impl;
+/*package bfs.TeamProj.dao.impl;
 
 import bfs.TeamProj.dao.DigitalDocumentDao;
 import bfs.TeamProj.domain.DigitalDocument;
@@ -44,3 +44,6 @@ public class DigitalDocumentDaoImpl implements DigitalDocumentDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 }
+
+
+ */

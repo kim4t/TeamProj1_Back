@@ -73,6 +73,10 @@ public class setup implements CommandLineRunner {
        if(token.isPresent()){
            System.out.println(token.get().getToken());
        }
+        //logger.info("start to insert data");
+        //User u = userService.getUserByEmail("email1");
+
+        //System.out.println(u.getUserName());
         //System.out.println(tokenService.getAllToken().toString());
 
 /*        VisaStatus v = new VisaStatus();

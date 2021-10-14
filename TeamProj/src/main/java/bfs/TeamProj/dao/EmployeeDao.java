@@ -9,5 +9,5 @@ public interface EmployeeDao {
 
     List<Employee> getAllEmployee();
 
-    Integer addEmployee(Employee Employee, int personId, int visaStatusId);
+    Employee addEmployee(Employee employee);
 }

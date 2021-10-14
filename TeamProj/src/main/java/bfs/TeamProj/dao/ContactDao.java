@@ -5,7 +5,9 @@ import bfs.TeamProj.domain.Contact;
 import java.util.List;
 
 public interface ContactDao {
-    Integer addContact(Contact contact, int personId);
+    Contact addContact(Contact contact);
 
     List<Contact> getAllContact();
+
+    Contact getContactById(int id);
 }

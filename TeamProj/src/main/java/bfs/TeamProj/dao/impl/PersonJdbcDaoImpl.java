@@ -1,4 +1,5 @@
-package bfs.TeamProj.dao.impl;
+
+/*package bfs.TeamProj.dao.impl;
 
 import bfs.TeamProj.dao.PersonDao;
 import bfs.TeamProj.dao.jdbcmapper.PersonRowMapper;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 
-@Repository("personJdbcDao")
+
 public class PersonJdbcDaoImpl implements PersonDao {
     private JdbcTemplate jdbcTemplate;
 
@@ -51,3 +52,4 @@ public class PersonJdbcDaoImpl implements PersonDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 }
+*/

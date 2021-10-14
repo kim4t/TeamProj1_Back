@@ -2,9 +2,13 @@ package bfs.TeamProj.dao;
 
 import bfs.TeamProj.domain.Person;
 
+import java.util.List;
+
 public interface PersonDao {
     Person getPersonById(int id);
 
-    Integer addPerson(Person person);
+    List<Person> getALlPerson();
+
+    Person addPerson(Person person);
 
 }

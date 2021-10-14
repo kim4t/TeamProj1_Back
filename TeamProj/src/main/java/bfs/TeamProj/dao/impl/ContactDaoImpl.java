@@ -1,4 +1,4 @@
-package bfs.TeamProj.dao.impl;
+/*package bfs.TeamProj.dao.impl;
 
 import bfs.TeamProj.dao.ContactDao;
 import bfs.TeamProj.domain.Contact;
@@ -12,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 
-@Repository("contactJdbcDao")
+
 public class ContactDaoImpl implements ContactDao {
     private JdbcTemplate jdbcTemplate;
     private static final String GET_ALL_CONTACT = "SELECT * FROM contact";
@@ -45,3 +45,5 @@ public class ContactDaoImpl implements ContactDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 }
+
+ */

@@ -1,4 +1,4 @@
-package bfs.TeamProj.dao.impl;
+/*package bfs.TeamProj.dao.impl;
 
 import bfs.TeamProj.dao.RegistrationTokenDao;
 import bfs.TeamProj.domain.RegistrationToken;
@@ -53,3 +53,6 @@ public class RegistrationTokenDaoImpl implements RegistrationTokenDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 }
+
+
+ */

@@ -14,7 +14,7 @@ public class PermissionService {
     private PermissionDao permissionDao;
 
     @Transactional
-    public Integer addPermission(Permission permission) {
+    public Permission addPermission(Permission permission) {
         return permissionDao.addPermission(permission);
     }
 

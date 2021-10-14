@@ -8,14 +8,14 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class HobernatePermissionDao extends AbstractHibernateDAO<Permission> implements PermissionDao {
-    public HobernatePermissionDao() {
+public class HibernatePermissionDao extends AbstractHibernateDAO<Permission> implements PermissionDao {
+    public HibernatePermissionDao() {
         setClazz(Permission.class);
     }
 
     @Override
-    public Integer addPermission(Permission permission) {
-        return create(permission).getId();
+    public Permission addPermission(Permission permission) {
+        return create(permission);
     }
 
     @Override

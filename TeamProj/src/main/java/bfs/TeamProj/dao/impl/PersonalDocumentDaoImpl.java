@@ -1,4 +1,4 @@
-package bfs.TeamProj.dao.impl;
+/*package bfs.TeamProj.dao.impl;
 
 import bfs.TeamProj.dao.PersonalDocumentDao;
 import bfs.TeamProj.domain.PersonalDocument;
@@ -46,3 +46,5 @@ public class PersonalDocumentDaoImpl implements PersonalDocumentDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 }
+
+ */

@@ -14,7 +14,7 @@ public class RegistrationTokenService {
     private RegistrationTokenDao tokenDao;
 
     @Transactional
-    public Integer addToken(RegistrationToken token) {
+    public RegistrationToken addToken(RegistrationToken token) {
         return tokenDao.addRegistrationToken(token);
     }
 

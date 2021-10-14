@@ -17,12 +17,11 @@ public class HibernateUserDao extends AbstractHibernateDAO<User> implements User
     }
 
     public User getUserByEmail(String email){
-
         return findByField("email", email);
     }
 
     @Override
-    public Integer addUser(User user) {
-        return create(user).getId();
+    public User addUser(User user) {
+        return create(user);
     }
 }

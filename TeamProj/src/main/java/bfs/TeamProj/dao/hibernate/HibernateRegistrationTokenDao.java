@@ -10,14 +10,16 @@ import java.util.List;
 public class HibernateRegistrationTokenDao extends AbstractHibernateDAO<RegistrationToken> implements RegistrationTokenDao {
 
    public HibernateRegistrationTokenDao() {setClazz(RegistrationToken.class);}
-    @Override
-    public Integer addRegistrationToken(RegistrationToken token) {
-        return null;
-    }
+
 
     @Override
     public RegistrationToken getRegistrationTokenByToken(String name) {
         return findByField("token", name);
+
+
+    @Override
+    public RegistrationToken addRegistrationToken(RegistrationToken token) {
+        return create(token);
     }
 
     @Override

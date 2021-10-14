@@ -9,5 +9,5 @@ public interface RoleDao {
 
     Role getRoleById(int id);
 
-    Integer addRole(Role role);
+    Role addRole(Role role);
 }
