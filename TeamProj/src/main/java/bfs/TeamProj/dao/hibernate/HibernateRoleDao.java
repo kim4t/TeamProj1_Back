@@ -24,7 +24,7 @@ public class HibernateRoleDao extends AbstractHibernateDAO<Role> implements Role
     }
 
     @Override
-    public Integer addRole(Role role) {
-        return create(role).getId();
+    public Role addRole(Role role) {
+        return create(role);
     }
 }

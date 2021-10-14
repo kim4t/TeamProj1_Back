@@ -1,4 +1,4 @@
-package bfs.TeamProj.dao.impl;
+/*package bfs.TeamProj.dao.impl;
 
 import bfs.TeamProj.dao.UserDao;
 import bfs.TeamProj.dao.jdbcmapper.UserRowMapper;
@@ -51,3 +51,6 @@ public class UserJdbcDaoImpl implements UserDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 }
+
+
+ */

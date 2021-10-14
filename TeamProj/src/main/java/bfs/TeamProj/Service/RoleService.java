@@ -15,7 +15,7 @@ public class RoleService {
     private RoleDao roleDao;
 
     @Transactional
-    public Integer addRole(Role role) {
+    public Role addRole(Role role) {
         return roleDao.addRole(role);
     }
 

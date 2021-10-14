@@ -1,4 +1,6 @@
+/*
 package bfs.TeamProj.dao.impl;
+
 
 import bfs.TeamProj.dao.PermissionDao;
 import bfs.TeamProj.domain.Permission;
@@ -50,3 +52,4 @@ public class PermissionJdbcDaoImpl implements PermissionDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 }
+ */

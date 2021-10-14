@@ -7,5 +7,5 @@ public interface UserDao {
 
     User getUserByEmail(String email);
 
-    Integer addUser(User user);
+    User addUser(User user);
 }

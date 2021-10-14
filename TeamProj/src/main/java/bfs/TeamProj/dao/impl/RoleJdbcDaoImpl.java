@@ -1,4 +1,4 @@
-package bfs.TeamProj.dao.impl;
+/*package bfs.TeamProj.dao.impl;
 
 import bfs.TeamProj.dao.RoleDao;
 import bfs.TeamProj.domain.Role;
@@ -52,3 +52,5 @@ public class RoleJdbcDaoImpl implements RoleDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 }
+*/
+
