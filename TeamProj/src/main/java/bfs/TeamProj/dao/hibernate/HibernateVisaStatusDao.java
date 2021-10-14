@@ -1,4 +1,4 @@
-package bfs.TeamProj.dao.impl;
+package bfs.TeamProj.dao.hibernate;
 
 import bfs.TeamProj.dao.AbstractHibernateDAO;
 import bfs.TeamProj.dao.VisaStatusDao;

@@ -5,7 +5,7 @@ import bfs.TeamProj.domain.PersonalDocument;
 import java.util.List;
 
 public interface PersonalDocumentDao {
-    Integer addPersonalDocument(PersonalDocument doc, int EmployeeId);
+    PersonalDocument addPersonalDocument(PersonalDocument doc);
 
-    List<PersonalDocument> getPersonalDocumentListById(int id);
+    List<PersonalDocument> getPersonalDocumentListByEmployeeId(int personId);
 }

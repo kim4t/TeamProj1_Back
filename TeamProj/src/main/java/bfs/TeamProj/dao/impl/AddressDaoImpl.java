@@ -1,4 +1,4 @@
-package bfs.TeamProj.dao.impl;
+/*package bfs.TeamProj.dao.impl;
 
 import bfs.TeamProj.dao.AddressDao;
 import bfs.TeamProj.domain.Address;
@@ -12,7 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.List;
 
-@Repository("addressJdbcDao")
+
 public class AddressDaoImpl implements AddressDao {
     private JdbcTemplate jdbcTemplate;
     private static final String GET_ALL_ADDRESS = "SELECT * FROM address";
@@ -46,3 +46,4 @@ public class AddressDaoImpl implements AddressDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 }
+*/

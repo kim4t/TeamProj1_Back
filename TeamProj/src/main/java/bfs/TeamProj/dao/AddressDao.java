@@ -5,7 +5,9 @@ import bfs.TeamProj.domain.Address;
 import java.util.List;
 
 public interface AddressDao {
-    Integer addAddress(Address address, int personId);
+    Address addAddress(Address address);
 
     List<Address> getAllAddress();
+
+    Address getAddressById(int id);
 }

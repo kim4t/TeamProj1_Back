@@ -4,12 +4,13 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
 @Entity
 @Table(name ="digitalDocument")
-public class DigitalDocument {
+public class DigitalDocument implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)

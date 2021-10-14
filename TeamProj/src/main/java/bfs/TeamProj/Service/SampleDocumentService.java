@@ -14,7 +14,7 @@ public class SampleDocumentService {
     private DigitalDocumentDao documentDao;
 
     @Transactional
-    public Integer addSampleDocument(DigitalDocument doc) {
+    public DigitalDocument addSampleDocument(DigitalDocument doc) {
         return documentDao.addDigitalDocument(doc);
     }
 
