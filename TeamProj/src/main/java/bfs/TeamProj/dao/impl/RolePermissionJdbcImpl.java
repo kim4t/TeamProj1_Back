@@ -1,4 +1,4 @@
-package bfs.TeamProj.dao.impl;
+/*package bfs.TeamProj.dao.impl;
 
 import bfs.TeamProj.dao.RolePermissionDao;
 import bfs.TeamProj.domain.RolePermission;
@@ -46,3 +46,5 @@ public class RolePermissionJdbcImpl implements RolePermissionDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 }
+
+ */
