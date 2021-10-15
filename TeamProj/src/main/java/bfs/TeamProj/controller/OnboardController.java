@@ -4,10 +4,7 @@ import bfs.TeamProj.Service.*;
 import bfs.TeamProj.domain.*;
 import bfs.TeamProj.constant.Constant;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employee/onboard")
+@RequestMapping("/employee")
 @CrossOrigin(origins = "http://localhost:4200")
 public class OnboardController {
     @Autowired
@@ -38,7 +35,14 @@ public class OnboardController {
     @Autowired
     private ContactService contactService;
 
-    @PostMapping
+    @PostMapping(path = "/onboard2")
+    public OnBoardDataHolder onBoard2(@RequestBody OnBoardDataHolder onBoardDataHolder) {
+        System.out.println(onBoardDataHolder.toString());
+        return onBoardDataHolder;
+    }
+
+
+    @PostMapping(path = "/onboard")
     public String onBoard(HttpServletRequest request) {
 
         String email = request.getParameter("email");
@@ -208,5 +212,6 @@ public class OnboardController {
             contactService.addContact(contact);
         }
         return "done";
+
     }
 }
