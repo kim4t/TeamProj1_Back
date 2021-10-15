@@ -30,7 +30,7 @@ public class OnBoardDataHolder {
     private String visaDocumentPath;
     private String driverLicense;
     private LocalDate driverLicenseExpirationDate;
-    private LocalDate driverLicenseDocumentPath;
+    private String driverLicenseDocumentPath;
     private String firstNameRef;
     private String lastNameRef;
     private String middleNameRef;
@@ -44,14 +44,16 @@ public class OnBoardDataHolder {
     private String stateNameRef;
     private String zipCodeRef;
     private List<EmergencyContact> emergencyContact;
+
+    @Data
+    public static class EmergencyContact {
+        private String firstName;
+        private String lastName;
+        private String middleName;
+        private String cellphone;
+        private String email;
+        private String relationship;
+    }
 }
 
-@Data
-class EmergencyContact {
-    private String firstName;
-    private String lastName;
-    private String middleName;
-    private String cellphone;
-    private String email;
-    private String relationship;
-}
+
