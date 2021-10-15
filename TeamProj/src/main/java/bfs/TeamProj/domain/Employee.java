@@ -47,14 +47,14 @@ public class Employee implements Serializable {
     @JoinColumn(name = "houseId")
     private House house;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "visaStatusId")
     private VisaStatus visaStatus;
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     private List<FacilityReport> facilityReportList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee",fetch = FetchType.EAGER)
     private List<PersonalDocument> personalDocumentList = new ArrayList<>();
 
 }

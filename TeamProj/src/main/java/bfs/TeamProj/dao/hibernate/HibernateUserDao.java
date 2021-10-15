@@ -21,6 +21,11 @@ public class HibernateUserDao extends AbstractHibernateDAO<User> implements User
     }
 
     @Override
+    public User getUserByUserName(String userName) {
+        return findByField("userName", userName);
+    }
+
+    @Override
     public User addUser(User user) {
         return create(user);
     }

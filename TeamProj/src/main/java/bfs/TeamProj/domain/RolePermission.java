@@ -24,11 +24,11 @@ public class RolePermission implements Serializable {
     @Column(name = "lastModificationUser", nullable = false, length = 250)
     private String lastModificationUser;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "roleId")
     private Role role;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "permissionId")
     private Permission permission;
 

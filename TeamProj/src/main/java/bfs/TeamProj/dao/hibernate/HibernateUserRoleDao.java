@@ -18,6 +18,11 @@ public class HibernateUserRoleDao extends AbstractHibernateDAO<UserRole> impleme
     }
 
     @Override
+    public UserRole getUserRoleById(int id) {
+        return findById(id);
+    }
+
+    @Override
     public List<UserRole> getAllUserRole() {
         return findAll();
     }

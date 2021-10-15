@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Entity
@@ -25,9 +26,9 @@ public class Role implements Serializable {
     @Column(name = "lastModificationUser", nullable = false, length = 250)
     private String lastModificationUser;
 
-    @OneToOne(mappedBy = "role")
-    private UserRole userRole;
-    @OneToOne(mappedBy = "role")
+    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
+    private List<UserRole> userRole;
+    @OneToOne(mappedBy = "role", fetch = FetchType.LAZY)
     private RolePermission rolePermission;
 }
 

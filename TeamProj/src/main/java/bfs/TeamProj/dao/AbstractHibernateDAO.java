@@ -26,6 +26,11 @@ public abstract class AbstractHibernateDAO<T extends Serializable> {
                 .setParameter(column, value).uniqueResult();
     }
 
+    public <T,V> T findALLByField(final String column, final V value) {
+        return (T) getCurrentSession().createQuery("from " + clazz.getName() + " where " + column + " =:" + column)
+                .setParameter(column, value).list();
+    }
+
     public List<T> findAll() {
         return getCurrentSession().createQuery("from " + clazz.getName()).list();
     }

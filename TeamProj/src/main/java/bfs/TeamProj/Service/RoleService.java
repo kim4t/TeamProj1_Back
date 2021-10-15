@@ -41,6 +41,11 @@ public class RoleService {
         return userRoleDao.addUserRole(userRole);
     }
 
+    @Transactional
+    public UserRole getUserRoleById(int id) {
+        return userRoleDao.getUserRoleById(id);
+    }
+
 
     @Autowired
     public void setRoleDao(RoleDao roleDao) {

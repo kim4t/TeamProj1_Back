@@ -30,6 +30,6 @@ public class HibernateContactDao extends AbstractHibernateDAO<Contact> implement
 
     @Override
     public List<Contact> getContactsByRefPersonId(int personId) {
-        return findByField("referencePersonId", personId);
+        return findALLByField("referencePersonId", personId);
     }
 }

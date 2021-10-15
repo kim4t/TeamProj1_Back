@@ -45,14 +45,14 @@ public class AmazonS3BucketService {
          */
     }
 
-    public String uploadFile(MultipartFile multipartFile) {
+    public String uploadFile(MultipartFile multipartFile, String userName) {
         String fileURL = "";
         String fileName = "";
         try {
             File file = convertMultipartFileToFile(multipartFile);
             fileName = multipartFile.getOriginalFilename();
             //TODO: add username to the file
-            //fileName  = userName + fileName;
+            fileName = userName + "_" + fileName;
             fileURL = endpointUrl + "/" + bucketName + "/" + fileName;
             uploadFileToBucket(fileName, file);
             file.delete();
@@ -61,7 +61,7 @@ public class AmazonS3BucketService {
         }
         System.out.println(fileURL);
         //https://proj-angular-bucket.s3.us-east-2.amazonaws.com/testFile.docx
-        return "https://" + bucketName +".s3."+region+".amazonaws.com/"+ fileName;
+        return "https://" + bucketName + ".s3." + region + ".amazonaws.com/" + fileName;
     }
 
     private File convertMultipartFileToFile(MultipartFile file) throws IOException {
@@ -76,5 +76,5 @@ public class AmazonS3BucketService {
         amazonS3.putObject(new PutObjectRequest(bucketName, fileName, file)
                 .withCannedAcl(CannedAccessControlList.PublicRead));
     }
-    
+
 }
