@@ -87,7 +87,7 @@ public class OnBoardService {
         emp.setPerson(p);
         emp.setVisaStatus(visaStatus);
         String avatar = Constant.DEFAULT_AVATAR;
-        if(holder.getAvatar()!= null) {
+        if (holder.getAvatar() != null) {
             avatar = holder.getAvatar();
         }
         emp.setAvatar(avatar);
@@ -129,17 +129,15 @@ public class OnBoardService {
             personalDocumentService.addPersonalDocument(dLDoc);
         }
         //personal document for work authorization
-        if (!(visaType.equals("Green Card") || visaType.equals("Citizen"))) {
-            PersonalDocument workAuthDoc = new PersonalDocument();
-            workAuthDoc.setComment("default");
-            workAuthDoc.setCreatedBy(u.getUserName());
-            workAuthDoc.setCreatedDate(LocalDate.now());
-            workAuthDoc.setPath(holder.getVisaDocumentPath());
-            workAuthDoc.setTitle("work authorization file");
-            workAuthDoc.setEmployee(emp);
-            personalDocumentService.addPersonalDocument(workAuthDoc);
-        }
-
+        PersonalDocument workAuthDoc = new PersonalDocument();
+        workAuthDoc.setComment("default");
+        workAuthDoc.setCreatedBy(u.getUserName());
+        workAuthDoc.setCreatedDate(LocalDate.now());
+        workAuthDoc.setPath(holder.getVisaDocumentPath());
+        workAuthDoc.setTitle("work authorization file");
+        workAuthDoc.setEmployee(emp);
+        personalDocumentService.addPersonalDocument(workAuthDoc);
+        
         //add the reference person if exist
         if (holder.getFirstNameRef() != null) {
             Person referencePerson = new Person();
@@ -175,7 +173,7 @@ public class OnBoardService {
         }
 
         //add the emergency contact list
-        for(OnBoardDataHolder.EmergencyContact emergencyCount : holder.getEmergencyContact()){
+        for (OnBoardDataHolder.EmergencyContact emergencyCount : holder.getEmergencyContact()) {
             Person person = new Person();
             person.setFirstName(emergencyCount.getFirstName());
             person.setLastName(emergencyCount.getLastName());
