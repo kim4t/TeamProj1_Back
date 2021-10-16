@@ -30,6 +30,8 @@ public class setup implements CommandLineRunner {
     private RoleService roleService;
     @Autowired
     private PermissionService permissionService;
+    @Autowired
+    private ContactService contactService;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -39,10 +41,41 @@ public class setup implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        dataSetUp();
+
         //cleanAlltable();
+        //dataSetUp();
+        //test();
     }
 
+    public void test(){
+        User user = userService.getUserByUserName("qqeq");
+        Person p = user.getPerson();
+        Employee emp = p.getEmployee();
+        Contact contact = p.getContact();
+        List<PersonalDocument> docList = emp.getPersonalDocumentList();
+
+
+        List<Contact> emglist = contactService.getContactsByRefPersonId(p.getId());
+        for(Contact c : emglist) {
+           Person person = personService.getPersonById(c.getPerson().getId());
+           System.out.println(person.getFirstName());
+            System.out.println(person.getLastName());
+        }
+
+        VisaStatus visaStatus = emp.getVisaStatus();
+        System.out.println(visaStatus.getVisaType());
+        //Person p = personService.getPersonById(user.getPerson().getId());
+
+        //Role role = user.getUserRole().getRole();
+        //UserRole userRole = user.getUserRole();
+
+
+
+        //UserRole userRole = userService.getUserByUserName("qqeq").getUserRole();
+        //Role role = roleService.getRoleById(userRole.getRole().getId());
+        //System.out.println(role.getRoleName());
+        //System.out.println(role.toString());
+    }
 
     //used to remove all table from database
     public void cleanAlltable() {

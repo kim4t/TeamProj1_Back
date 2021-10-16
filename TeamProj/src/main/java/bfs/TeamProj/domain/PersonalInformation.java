@@ -21,6 +21,7 @@ public class PersonalInformation {
         private int personId;
         private String firstName;
         private String lastName;
+        private String middleName;
         private String avatar;
         private String dob;
         private String gender;
@@ -71,6 +72,7 @@ public class PersonalInformation {
         private int docId;
         private String path;
         private String title;
+        private LocalDate createDate;
     }
 
 
