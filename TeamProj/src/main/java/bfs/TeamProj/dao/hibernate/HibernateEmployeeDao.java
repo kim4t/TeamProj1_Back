@@ -27,4 +27,9 @@ public class HibernateEmployeeDao extends AbstractHibernateDAO<Employee> impleme
     public Employee addEmployee(Employee employee) {
         return create(employee);
     }
+
+    @Override
+    public Employee updateEmployee(Employee employee) {
+        return update(employee);
+    }
 }

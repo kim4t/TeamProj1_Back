@@ -4,7 +4,6 @@ import bfs.TeamProj.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,19 +14,27 @@ public class HomePageService {
     @Autowired
     private UserService userService;
     @Autowired
-    private RoleService roleService;
-    @Autowired
-    private AddressService addressService;
-    @Autowired
-    private VisaStatusService visaStatusService;
+    private ContactService contactService;
     @Autowired
     private EmployeeService employeeService;
-    @Autowired
-    private ApplicationWorkFlowService applicationWorkFlowService;
-    @Autowired
-    private PersonalDocumentService personalDocumentService;
-    @Autowired
-    private ContactService contactService;
+
+
+    public PersonalInformation.NameSection updateName(PersonalInformation.NameSection nameSection) {
+        Person person = personService.getPersonById(nameSection.getPersonId());
+        Employee employee = employeeService.getEmployeeById(person.getEmployee().getId());
+        System.out.println(employee.getAvatar());
+        person.setFirstName(nameSection.getFirstName());
+        person.setLastName(nameSection.getLastName());
+        person.setMiddleName(nameSection.getMiddleName());
+        person.setDOB(nameSection.getDob());
+        person.setGender(nameSection.getGender());
+        person.setSSN(nameSection.getSsn());
+        employee.setAvatar(nameSection.getAvatar());
+        personService.updatePerson(person);
+        employeeService.updateEmployee(employee);
+        return nameSection;
+    }
+
 
     public PersonalInformation assemble(String username) {
         User user = userService.getUserByUserName(username);
@@ -44,6 +51,7 @@ public class HomePageService {
         nameSection.setPersonId(person.getId());
         nameSection.setFirstName(person.getFirstName());
         nameSection.setLastName(person.getLastName());
+        nameSection.setMiddleName(person.getMiddleName());
         nameSection.setAvatar(employee.getAvatar());
         nameSection.setDob(person.getDOB());
         nameSection.setGender(person.getGender());
@@ -54,7 +62,7 @@ public class HomePageService {
         PersonalInformation.AddressSection addressSection = new PersonalInformation.AddressSection();
         addressSection.setAddressId(address.getId());
         addressSection.setAddressLine1(address.getAddressLine1());
-        addressSection.setAddressLine2(addressSection.getAddressLine1());
+        addressSection.setAddressLine2(addressSection.getAddressLine2());
         addressSection.setCity(address.getCity());
         addressSection.setStateAbbr(address.getStateAbbr());
         addressSection.setStateName(address.getStateName());
@@ -83,15 +91,17 @@ public class HomePageService {
         List<PersonalInformation.EmergencyContact> emergencyContactList = new ArrayList<>();
         List<Contact> emglist = contactService.getContactsByRefPersonId(person.getId());
         for (Contact c : emglist) {
-            PersonalInformation.EmergencyContact contact = new PersonalInformation.EmergencyContact();
-            Person p = personService.getPersonById(c.getPerson().getId());
-            contact.setPersonId(p.getId());
-            contact.setFirstName(p.getFirstName());
-            contact.setLastName(p.getLastName());
-            contact.setEmail(p.getEmail());
-            contact.setCellphone(p.getCellphone());
-            contact.setRelationship(c.getRelationship());
-            emergencyContactList.add(contact);
+            if (c.getIsEmergency()) {
+                PersonalInformation.EmergencyContact contact = new PersonalInformation.EmergencyContact();
+                Person p = personService.getPersonById(c.getPerson().getId());
+                contact.setPersonId(p.getId());
+                contact.setFirstName(p.getFirstName());
+                contact.setLastName(p.getLastName());
+                contact.setEmail(p.getEmail());
+                contact.setCellphone(p.getCellphone());
+                contact.setRelationship(c.getRelationship());
+                emergencyContactList.add(contact);
+            }
         }
         info.setEmergencyContactList(emergencyContactList);
 
@@ -102,6 +112,7 @@ public class HomePageService {
             document.setDocId(doc.getId());
             document.setPath(doc.getPath());
             document.setTitle(doc.getTitle());
+            document.setCreateDate(doc.getCreatedDate());
             personalDocumentList.add(document);
         }
         info.setPersonalDocumentList(personalDocumentList);
