@@ -1,5 +1,6 @@
 package bfs.TeamProj.Service;
 
+import bfs.TeamProj.domain.Employee;
 import bfs.TeamProj.domain.EmployeeProfile;
 import bfs.TeamProj.domain.Person;
 import bfs.TeamProj.domain.VisaStatus;
@@ -20,16 +21,17 @@ public class HRService {
 
     public List<EmployeeProfile> getAllEmployeeProfile(){
         List<EmployeeProfile> res = new ArrayList<>();
-        List<Person> personList = personService.getAllPerson();
-        for(Person p : personList){
+        List<Employee> employeeList = employeeService.getAllEmployee();
+        for(Employee e : employeeList){
             EmployeeProfile employeeProfile = new EmployeeProfile();
+            Person p = personService.getPersonById(e.getPerson().getId());
             employeeProfile.setFirstName(p.getFirstName());
             employeeProfile.setMiddleName(p.getMiddleName());
             employeeProfile.setLastName(p.getLastName());
             employeeProfile.setVisaStartDate(
-                    employeeService.getEmployeeById(p.getId()).getVisaStartDate()
+                    e.getVisaStartDate()
             );
-            employeeProfile.setVisaStatus(employeeService.getEmployeeById(p.getId()).getVisaStatus().getVisaType());
+            employeeProfile.setVisaStatus(e.getVisaStatus().getVisaType());
             res.add(employeeProfile);
         }
         return res;

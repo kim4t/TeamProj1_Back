@@ -23,11 +23,11 @@ public class HRController {
 
     @GetMapping("/employeeProfile")
     public List<EmployeeProfile> getAllEmployeeProfile(HttpServletRequest request){
-        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
-        System.out.println(username);
-        if(username == null) {
-            return null;
-        }
+//        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
+//        System.out.println(username);
+//        if(username == null) {
+//            return null;
+//        }
         return hrService.getAllEmployeeProfile();
     }
 
