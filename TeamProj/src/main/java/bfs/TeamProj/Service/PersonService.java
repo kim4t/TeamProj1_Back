@@ -6,29 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service("personService")
 public class PersonService {
     @Autowired
     private PersonDao personDao;
 
     @Transactional
-    public Integer addPerson(String firstName, String LastName, String midName, String email,
-                             String cell, String altPhone, String gender, String ssn, String dob) {
-        Person p = new Person();
-        p.setFirstName(firstName);
-        p.setLastName(LastName);
-        //p.setMiddleName(midName);
-        p.setEmail(email);
-        p.setCellphone(cell);
-        p.setAlternatePhone(altPhone);
-        p.setGender(gender);
-        p.setSSN(ssn);
-        p.setDOB(dob);
+    public Person addPerson(Person p) {
         return personDao.addPerson(p);
     }
 
     @Transactional
     public Person getPersonById(int id) {
         return personDao.getPersonById(id);
+    }
+
+    @Transactional
+    public List<Person> getAllPerson(){
+        return personDao.getALlPerson();
     }
 }

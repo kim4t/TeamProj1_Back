@@ -3,11 +3,13 @@ package bfs.TeamProj.domain;
 import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
+
 @Data
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
@@ -24,10 +26,22 @@ public class User {
     private LocalDate modificationDate;
 
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "personId")
     private Person person;
 
-    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "user", fetch = FetchType.EAGER)
     private UserRole userRole;
+
+    @Override
+    public String toString() {
+        return String.format("%s(id=%d, name='%s', email=%s, password=%s, createDate=%s, personId=%s)",
+                this.getClass().getSimpleName(),
+                this.getId(),
+                this.getUserName(),
+                this.getEmail(),
+                this.getPassword(),
+                this.getCreateDate(),
+                this.getPerson() == null ? "no person" : this.getPerson().getId());
+    }
 }

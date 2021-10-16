@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name="employee")
-public class Employee {
+public class Employee implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
@@ -21,17 +22,17 @@ public class Employee {
     private String title;
     @Column(name = "managerId", nullable = true)
     private Integer managerId;
-    @Column(name = "startDate", nullable = false, length = 250)
+    @Column(name = "startDate", nullable = true, length = 250)
     private LocalDate startDate;
-    @Column(name = "endDate", nullable = false, length = 250)
+    @Column(name = "endDate", nullable = true, length = 250)
     private LocalDate endDate;
     @Column(name = "avatar", nullable = true, length = 250)
     private String avatar;
     @Column(name = "car", nullable = true, length = 250)
     private String car;
-    @Column(name = "visaStartDate", nullable = false, length = 250)
+    @Column(name = "visaStartDate", nullable = true, length = 250)
     private LocalDate visaStartDate;
-    @Column(name = "visaEndDate", nullable = false, length = 250)
+    @Column(name = "visaEndDate", nullable = true, length = 250)
     private LocalDate visaEndDate;
     @Column(name = "driverLicense", nullable = true, length = 250)
     private String driverLicense;
@@ -46,14 +47,14 @@ public class Employee {
     @JoinColumn(name = "houseId")
     private House house;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "visaStatusId")
     private VisaStatus visaStatus;
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     private List<FacilityReport> facilityReportList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee",fetch = FetchType.EAGER)
     private List<PersonalDocument> personalDocumentList = new ArrayList<>();
 
 }

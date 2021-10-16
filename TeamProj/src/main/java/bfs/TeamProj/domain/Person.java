@@ -1,12 +1,16 @@
 package bfs.TeamProj.domain;
 
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
+@RequiredArgsConstructor
 @Entity
 @Table(name = "person")
-public class Person {
+public class Person implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
@@ -44,4 +48,10 @@ public class Person {
 
     @OneToOne(mappedBy = "person", fetch = FetchType.LAZY)
     private User user;
+
+    @OneToOne(mappedBy = "person", fetch = FetchType.LAZY)
+    private Address address;
+
+    @OneToOne(mappedBy = "person", fetch = FetchType.LAZY)
+    private Employee employee;
 }
