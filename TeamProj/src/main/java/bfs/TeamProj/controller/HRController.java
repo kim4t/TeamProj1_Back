@@ -42,13 +42,13 @@ public class HRController {
         return hrService.getAllStatusProfile();
     }
 
-//    @GetMapping("/visaStatusManagement")
-//    public String foo (HttpServletRequest request){
-//        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
-//        System.out.println(username);
-//        if(username == null) {
-//            return null;
-//        }
-//        return null;
-//    }
+    @GetMapping("/visaStatusManagement")
+    public String foo (HttpServletRequest request){
+        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
+        System.out.println(username);
+        if(username == null) {
+            return null;
+        }
+        return null;
+    }
 }

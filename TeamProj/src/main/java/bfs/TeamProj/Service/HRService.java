@@ -27,6 +27,8 @@ public class HRService {
         for(Employee e : employeeList){
             EmployeeProfile employeeProfile = new EmployeeProfile();
             Person p = personService.getPersonById(e.getPerson().getId());
+            employeeProfile.setEmployeeId(e.getId());
+            employeeProfile.setSSN(p.getSSN());
             employeeProfile.setFirstName(p.getFirstName());
             employeeProfile.setMiddleName(p.getMiddleName());
             employeeProfile.setLastName(p.getLastName());
@@ -46,6 +48,7 @@ public class HRService {
         for(Employee e : employeeList){
             StatusProfile statusProfile = new StatusProfile();
             Person p = personService.getPersonById(e.getPerson().getId());
+            statusProfile.setEmployeeId(e.getId());
             statusProfile.setFirstName(p.getFirstName());
             statusProfile.setLastName(p.getLastName());
             statusProfile.setMiddleName(p.getMiddleName());
