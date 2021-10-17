@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 @Data
 public class StatusProfile {
+    private int employeeId;
     private String firstName;
     private String lastName;
     private String middleName;

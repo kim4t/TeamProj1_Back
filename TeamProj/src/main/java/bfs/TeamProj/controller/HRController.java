@@ -1,6 +1,7 @@
 package bfs.TeamProj.controller;
 
 import bfs.TeamProj.Service.HRService;
+import bfs.TeamProj.Service.HouseService;
 import bfs.TeamProj.constant.Constant;
 import bfs.TeamProj.domain.EmployeeProfile;
 import bfs.TeamProj.domain.PersonalInformation;
@@ -22,6 +23,9 @@ public class HRController {
     @Autowired
     private HRService hrService;
 
+    //@Autowired
+    //private HouseService houseService;
+
     @GetMapping("/employeeProfile")
     public List<EmployeeProfile> getAllEmployeeProfile(HttpServletRequest request){
 //        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
@@ -42,13 +46,16 @@ public class HRController {
         return hrService.getAllStatusProfile();
     }
 
-//    @GetMapping("/visaStatusManagement")
-//    public String foo (HttpServletRequest request){
-//        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
-//        System.out.println(username);
-//        if(username == null) {
-//            return null;
-//        }
-//        return null;
-//    }
+    @GetMapping("/visaStatusManagement")
+    public String foo (HttpServletRequest request){
+        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
+        System.out.println(username);
+        if(username == null) {
+            return null;
+        }
+        return null;
+    }
+
+
+
 }
