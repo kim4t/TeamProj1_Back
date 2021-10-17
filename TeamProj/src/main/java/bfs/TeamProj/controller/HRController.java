@@ -1,6 +1,7 @@
 package bfs.TeamProj.controller;
 
 import bfs.TeamProj.Service.HRService;
+import bfs.TeamProj.Service.HouseService;
 import bfs.TeamProj.constant.Constant;
 import bfs.TeamProj.domain.EmployeeProfile;
 import bfs.TeamProj.domain.PersonalInformation;
@@ -21,6 +22,9 @@ import java.util.List;
 public class HRController {
     @Autowired
     private HRService hrService;
+
+    //@Autowired
+    //private HouseService houseService;
 
     @GetMapping("/employeeProfile")
     public List<EmployeeProfile> getAllEmployeeProfile(HttpServletRequest request){
@@ -51,4 +55,7 @@ public class HRController {
         }
         return null;
     }
+
+
+
 }
