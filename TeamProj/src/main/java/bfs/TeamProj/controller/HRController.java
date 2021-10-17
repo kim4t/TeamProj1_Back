@@ -3,18 +3,13 @@ package bfs.TeamProj.controller;
 import bfs.TeamProj.Service.HRService;
 import bfs.TeamProj.Service.HouseService;
 import bfs.TeamProj.constant.Constant;
-import bfs.TeamProj.domain.ApplicationForm;
-import bfs.TeamProj.domain.EmployeeProfile;
-import bfs.TeamProj.domain.PersonalInformation;
-import bfs.TeamProj.domain.StatusProfile;
+import bfs.TeamProj.domain.*;
 import bfs.TeamProj.security.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -56,6 +51,20 @@ public class HRController {
 //        }
         return hrService.getAllApplication();
     }
+
+    @GetMapping("/applicationReview/detail")
+    public OnBoardDataHolder getApplicationDetailById(HttpServletResponse httpServletResponse, int employeeId, HttpServletRequest request) {
+//        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
+//        System.out.println(username);
+//        if(username == null) {
+//            return null;
+//        }
+
+        return hrService.getApplicationDetailById(employeeId);
+
+    }
+
+
 
 //    @GetMapping("/visaStatusManagement")
 //    public String foo(HttpServletRequest request) {

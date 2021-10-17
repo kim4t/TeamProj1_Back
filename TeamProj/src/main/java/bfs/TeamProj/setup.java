@@ -36,6 +36,9 @@ public class setup implements CommandLineRunner {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private AddressService addressService;
+
 
     private static final Logger logger = LoggerFactory.getLogger(setup.class);
 
@@ -98,6 +101,7 @@ public class setup implements CommandLineRunner {
         jdbcTemplate.execute("DROP TABLE IF EXISTS contact");
         jdbcTemplate.execute("DROP TABLE IF EXISTS person");
     }
+
 
     public void dataSetUp() {
         logger.info("start to insert data");
