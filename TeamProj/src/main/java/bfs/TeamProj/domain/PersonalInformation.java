@@ -41,6 +41,7 @@ public class PersonalInformation {
 
     @Data
     public static class ContactSection {
+        private int personId;
         private String email;
         private String cellphone;
         private String alternatePhone;

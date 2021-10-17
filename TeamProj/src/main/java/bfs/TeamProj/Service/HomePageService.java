@@ -4,6 +4,7 @@ import bfs.TeamProj.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,10 @@ public class HomePageService {
     private ContactService contactService;
     @Autowired
     private EmployeeService employeeService;
-
+    @Autowired
+    private AddressService addressService;
+    @Autowired
+    private VisaStatusService visaStatusService;
 
     public PersonalInformation.NameSection updateName(PersonalInformation.NameSection nameSection) {
         Person person = personService.getPersonById(nameSection.getPersonId());
@@ -33,6 +37,41 @@ public class HomePageService {
         personService.updatePerson(person);
         employeeService.updateEmployee(employee);
         return nameSection;
+    }
+
+
+    public PersonalInformation.AddressSection updateAddress(PersonalInformation.AddressSection addressSection) {
+        Address address = addressService.getAddressById(addressSection.getAddressId());
+        address.setAddressLine1(addressSection.getAddressLine1());
+        address.setAddressLine2(addressSection.getAddressLine2());
+        address.setCity(addressSection.getCity());
+        address.setStateAbbr(addressSection.getStateAbbr());
+        address.setStateName(addressSection.getStateName());
+        address.setZipCode(addressSection.getZipCode());
+        addressService.updateAddress(address);
+        return addressSection;
+    }
+
+    public PersonalInformation.ContactSection updateContact(PersonalInformation.ContactSection contactSection) {
+        Person person = personService.getPersonById(contactSection.getPersonId());
+        person.setCellphone(contactSection.getCellphone());
+        person.setAlternatePhone(contactSection.getAlternatePhone());
+        personService.updatePerson(person);
+        return contactSection;
+    }
+
+    public PersonalInformation.EmployeeSection updateEmployee(PersonalInformation.EmployeeSection employeeSection) {
+        Employee employee = employeeService.getEmployeeById(employeeSection.getEmployeeId());
+        VisaStatus visaStatus = employee.getVisaStatus();
+        visaStatus.setVisaType(employeeSection.getVisaType());
+        visaStatus.setModificationDate(LocalDate.now());
+        visaStatusService.updateVisaStatus(visaStatus);
+        employee.setVisaStartDate(employeeSection.getVisaStartDate());
+        employee.setVisaEndDate(employeeSection.getVisaEndDate());
+        employee.setStartDate(employeeSection.getStartDate());
+        employee.setEndDate(employeeSection.getEndDate());
+        employee.setTitle(employee.getTitle());
+        return employeeSection;
     }
 
 
@@ -62,7 +101,7 @@ public class HomePageService {
         PersonalInformation.AddressSection addressSection = new PersonalInformation.AddressSection();
         addressSection.setAddressId(address.getId());
         addressSection.setAddressLine1(address.getAddressLine1());
-        addressSection.setAddressLine2(addressSection.getAddressLine2());
+        addressSection.setAddressLine2(address.getAddressLine2());
         addressSection.setCity(address.getCity());
         addressSection.setStateAbbr(address.getStateAbbr());
         addressSection.setStateName(address.getStateName());
@@ -71,6 +110,7 @@ public class HomePageService {
 
         //contact section
         PersonalInformation.ContactSection contactSection = new PersonalInformation.ContactSection();
+        contactSection.setPersonId(person.getId());
         contactSection.setEmail(person.getEmail());
         contactSection.setCellphone(person.getCellphone());
         contactSection.setAlternatePhone(person.getAlternatePhone());

@@ -24,12 +24,18 @@ public class AddressService {
     }
 
     @Transactional
-    Address getAddressById(int id) {
+    public Address getAddressById(int id) {
         return addressDao.getAddressById(id);
     }
 
     @Transactional
-    Address getAddressByPersonId(int personId) {
+    public Address getAddressByPersonId(int personId) {
         return addressDao.getAddressByPersonId(personId);
     }
+
+    @Transactional
+    public Address updateAddress(Address address) {
+        return addressDao.updateAddress(address);
+    }
+
 }

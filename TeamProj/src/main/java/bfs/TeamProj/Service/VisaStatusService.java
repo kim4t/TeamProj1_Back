@@ -20,6 +20,11 @@ public class VisaStatusService {
         return visaStatusDao.getVisaStatusById(id);
     }
 
+    @Transactional
+    public VisaStatus updateVisaStatus(VisaStatus visaStatus) {
+        return visaStatusDao.updateVisaStatus(visaStatus);
+
+    }
 
     @Autowired
     public void setVisaStatusDao(VisaStatusDao visaStatusDao) {

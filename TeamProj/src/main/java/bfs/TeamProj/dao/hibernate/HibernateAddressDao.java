@@ -32,4 +32,9 @@ public class HibernateAddressDao extends AbstractHibernateDAO<Address> implement
     public Address getAddressByPersonId(int personId) {
         return findByField("personId", personId);
     }
+
+    @Override
+    public Address updateAddress(Address address) {
+        return update(address);
+    }
 }
