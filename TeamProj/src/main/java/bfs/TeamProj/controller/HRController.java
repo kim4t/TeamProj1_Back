@@ -3,6 +3,7 @@ package bfs.TeamProj.controller;
 import bfs.TeamProj.Service.HRService;
 import bfs.TeamProj.Service.HouseService;
 import bfs.TeamProj.constant.Constant;
+import bfs.TeamProj.domain.ApplicationForm;
 import bfs.TeamProj.domain.EmployeeProfile;
 import bfs.TeamProj.domain.PersonalInformation;
 import bfs.TeamProj.domain.StatusProfile;
@@ -27,7 +28,7 @@ public class HRController {
     //private HouseService houseService;
 
     @GetMapping("/employeeProfile")
-    public List<EmployeeProfile> getAllEmployeeProfile(HttpServletRequest request){
+    public List<EmployeeProfile> getAllEmployeeProfile(HttpServletRequest request) {
 //        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
 //        System.out.println(username);
 //        if(username == null) {
@@ -37,7 +38,7 @@ public class HRController {
     }
 
     @GetMapping("/statusTracking")
-    public List<StatusProfile> getAllStatusProfile(HttpServletRequest request){
+    public List<StatusProfile> getAllStatusProfile(HttpServletRequest request) {
 //        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
 //        System.out.println(username);
 //        if(username == null) {
@@ -46,16 +47,25 @@ public class HRController {
         return hrService.getAllStatusProfile();
     }
 
-    @GetMapping("/visaStatusManagement")
-    public String foo (HttpServletRequest request){
-        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
-        System.out.println(username);
-        if(username == null) {
-            return null;
-        }
-        return null;
+    @GetMapping("/applicationReview")
+    public List<ApplicationForm> getAllApplication(HttpServletRequest request) {
+//        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
+//        System.out.println(username);
+//        if(username == null) {
+//            return null;
+//        }
+        return hrService.getAllApplication();
     }
 
+//    @GetMapping("/visaStatusManagement")
+//    public String foo(HttpServletRequest request) {
+//        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
+//        System.out.println(username);
+//        if (username == null) {
+//            return null;
+//        }
+//        return null;
+//    }
 
 
 }

@@ -63,4 +63,18 @@ public class HRService {
         }
         return res;
     }
+
+    public List<ApplicationForm> getAllApplication(){
+        List<ApplicationForm> res = new ArrayList<>();
+        List<ApplicationWorkFlow> applicationWorkFlowList = applicationWorkFlowService.getAllApplicationWorkFlow();
+        for(ApplicationWorkFlow a : applicationWorkFlowList){
+            ApplicationForm newForm = new ApplicationForm();
+            newForm.setEmployeeId(a.getEmployee().getId());
+            newForm.setLastModifiedDate(a.getModificationDate());
+            newForm.setType(a.getType());
+            newForm.setStatus(a.getStatus());
+            res.add(newForm);
+        }
+        return res;
+    }
 }

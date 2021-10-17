@@ -5,6 +5,8 @@ import bfs.TeamProj.dao.ApplicationWorkFlowDao;
 import bfs.TeamProj.domain.ApplicationWorkFlow;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class HibernateApplicationWorkFlowDao extends AbstractHibernateDAO<ApplicationWorkFlow> implements ApplicationWorkFlowDao {
 
@@ -15,6 +17,11 @@ public class HibernateApplicationWorkFlowDao extends AbstractHibernateDAO<Applic
     @Override
     public ApplicationWorkFlow getApplicationWorkFlowById(int id) {
         return findById(id);
+    }
+
+    @Override
+    public List<ApplicationWorkFlow> getAllApplicationWorkFlow() {
+        return findAll();
     }
 
     @Override
