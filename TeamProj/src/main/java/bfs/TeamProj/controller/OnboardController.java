@@ -15,9 +15,9 @@ public class OnboardController {
 
     @PostMapping(path = "/onboard")
     public String onBoard(@RequestBody OnBoardDataHolder onBoardDataHolder) {
-        //return onBoardService.assemble(onBoardDataHolder);
-        System.out.println(onBoardDataHolder.toString());
-        return onBoardDataHolder.toString();
+        return onBoardService.assemble(onBoardDataHolder);
+//        System.out.println(onBoardDataHolder.toString());
+//        return onBoardDataHolder.toString();
     }
 
 /*
