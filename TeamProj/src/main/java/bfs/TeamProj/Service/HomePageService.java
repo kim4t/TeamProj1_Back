@@ -76,7 +76,10 @@ public class HomePageService {
         employee.setVisaEndDate(employeeSection.getVisaEndDate());
         employee.setStartDate(employeeSection.getStartDate());
         employee.setEndDate(employeeSection.getEndDate());
-        employee.setTitle(employee.getTitle());
+        employee.setTitle(employeeSection.getTitle());
+        employee.setCar(employeeSection.getCar());
+        employee.setDriverLicense(employeeSection.getDriverLicense());
+        employee.setDriverLicenseExpirationDate(employeeSection.getDriverLicenseExpirationDate());
         employeeService.updateEmployee(employee);
         return employeeSection;
     }
@@ -119,6 +122,10 @@ public class HomePageService {
 
         PersonalInformation info = new PersonalInformation();
 
+        //comment
+        info.setHrComment(employee.getApplicationWorkFlow().getComments());
+        info.setAppStatus(employee.getApplicationWorkFlow().getStatus());
+
         //name section
         PersonalInformation.NameSection nameSection = new PersonalInformation.NameSection();
         nameSection.setPersonId(person.getId());
@@ -159,6 +166,9 @@ public class HomePageService {
         employeeSection.setStartDate(employee.getStartDate());
         employeeSection.setEndDate(employee.getEndDate());
         employeeSection.setTitle(employee.getTitle());
+        employeeSection.setCar(employee.getCar());
+        employeeSection.setDriverLicense(employee.getDriverLicense());
+        employeeSection.setDriverLicenseExpirationDate(employee.getDriverLicenseExpirationDate());
         info.setEmployeeSection(employeeSection);
 
         //emergency Contact section
@@ -175,6 +185,29 @@ public class HomePageService {
                 contact.setCellphone(p.getCellphone());
                 contact.setRelationship(c.getRelationship());
                 emergencyContactList.add(contact);
+            } else if (c.getIsReference()) {
+                PersonalInformation.ReferencePerson ref = new PersonalInformation.ReferencePerson();
+                Person p = personService.getPersonById(c.getPerson().getId());
+
+                ref.setPersonId(p.getId());
+                ref.setFirstName(p.getFirstName());
+                ref.setLastName(p.getLastName());
+                ref.setMiddleName(p.getMiddleName());
+                ref.setEmail(p.getEmail());
+                ref.setCellphone(p.getCellphone());
+                ref.setRelationship(c.getRelationship());
+                Address add = p.getAddress();
+                //Address add = addressService.getAddressByPersonId(p.getId());
+                PersonalInformation.AddressSection refAddressSection = new PersonalInformation.AddressSection();
+                refAddressSection.setAddressId(add.getId());
+                refAddressSection.setAddressLine1(add.getAddressLine1());
+                refAddressSection.setAddressLine2(add.getAddressLine2());
+                refAddressSection.setCity(add.getCity());
+                refAddressSection.setStateAbbr(add.getStateAbbr());
+                refAddressSection.setStateName(add.getStateName());
+                refAddressSection.setZipCode(add.getZipCode());
+                ref.setAddressSection(refAddressSection);
+                info.setReferencePerson(ref);
             }
         }
         info.setEmergencyContactList(emergencyContactList);
@@ -194,4 +227,39 @@ public class HomePageService {
         return info;
     }
 
+    public PersonalInformation reOnboard(PersonalInformation personalInformation) {
+        //name section
+        updateName(personalInformation.getNameSection());
+        //address section
+        updateAddress(personalInformation.getAddressSection());
+        //contact section
+        updateContact(personalInformation.getContactSection());
+        //employee section
+        updateEmployee(personalInformation.getEmployeeSection());
+        //emergency contact
+        updateEmergency(personalInformation.getEmergencyContactList());
+        //personal document
+        updateDocument(personalInformation.getPersonalDocumentList());
+        //update application workflow
+        Person person = personService.getPersonById(personalInformation.getNameSection().getPersonId());
+        Employee employee = employeeService.getEmployeeById(person.getEmployee().getId());
+        ApplicationWorkFlow applicationWorkFlow = applicationWorkFlowService.getApplicationWorkFlowById(employee.getApplicationWorkFlow().getId());
+        applicationWorkFlow.setStatus("Onboarding");
+        applicationWorkFlowService.updateApplicationWorkFlow(applicationWorkFlow);
+        //update reference person
+        PersonalInformation.ReferencePerson referencePersonSection = personalInformation.getReferencePerson();
+
+        Person refPerson = personService.getPersonById(referencePersonSection.getPersonId());
+        Contact contact = contactService.getContactById(refPerson.getContact().getId());
+        contact.setRelationship(referencePersonSection.getRelationship());
+        contactService.updateContact(contact);
+        refPerson.setFirstName(referencePersonSection.getFirstName());
+        refPerson.setLastName(referencePersonSection.getLastName());
+        refPerson.setMiddleName(referencePersonSection.getMiddleName());
+        refPerson.setCellphone(referencePersonSection.getCellphone());
+        refPerson.setEmail(referencePersonSection.getEmail());
+        personService.updatePerson(refPerson);
+        updateAddress(referencePersonSection.getAddressSection());
+        return personalInformation;
+    }
 }
