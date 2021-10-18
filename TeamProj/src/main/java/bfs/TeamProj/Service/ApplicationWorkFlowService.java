@@ -34,7 +34,7 @@ public class ApplicationWorkFlowService {
     }
 
     @Transactional
-    public ApplicationWorkFlow updateApplicationWorkFlow(ApplicationWorkFlow applicationWorkFlow){
+    public ApplicationWorkFlow updateApplicationWorkFlow(ApplicationWorkFlow applicationWorkFlow) {
         return applicationWorkFlowDao.updateApplicationWorkFlow(applicationWorkFlow);
     }
 }

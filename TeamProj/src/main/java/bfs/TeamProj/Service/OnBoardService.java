@@ -114,7 +114,7 @@ public class OnBoardService {
         aWF.setCreatedDate(LocalDate.now());
         aWF.setModificationDate(LocalDate.now());
         aWF.setStatus("Onboarding");
-        aWF.setType("employee");
+        aWF.setType(holder.getVisaType());
         applicationWorkFlowService.addApplicationWorkFlow(aWF);
 
         //personal document for driver license

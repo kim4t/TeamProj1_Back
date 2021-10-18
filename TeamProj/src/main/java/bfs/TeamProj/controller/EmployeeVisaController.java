@@ -26,7 +26,7 @@ public class EmployeeVisaController {
     }
 
     @PostMapping("/upload")
-    public EmployeeVisaInformation.VisaDocument uploadVisa (HttpServletRequest request, @RequestBody EmployeeVisaInformation.VisaDocument visaDocument) {
+    public EmployeeVisaInformation.VisaDocument uploadVisa(HttpServletRequest request, @RequestBody EmployeeVisaInformation.VisaDocument visaDocument) {
         String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
         System.out.println(username);
         if (username == null) {
@@ -34,5 +34,11 @@ public class EmployeeVisaController {
         }
         employeeVisaService.uploadVisa(visaDocument, username);
         return visaDocument;
+    }
+
+    @PostMapping("/newStep")
+    public EmployeeVisaInformation.VisaStage newStep(HttpServletRequest request, @RequestBody EmployeeVisaInformation.VisaStage visaStage) {
+        employeeVisaService.newStep(visaStage);
+        return visaStage;
     }
 }
