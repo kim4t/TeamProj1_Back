@@ -33,4 +33,9 @@ public class HibernateApplicationWorkFlowDao extends AbstractHibernateDAO<Applic
     public ApplicationWorkFlow getApplicationWorkFlowByEmployeeId(int employeeId) {
         return findByField("employeeId", employeeId);
     }
+
+    @Override
+    public ApplicationWorkFlow updateApplicationWorkFlow(ApplicationWorkFlow applicationWorkFlow) {
+        return update(applicationWorkFlow);
+    }
 }

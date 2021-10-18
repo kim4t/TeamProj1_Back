@@ -12,4 +12,6 @@ public interface ApplicationWorkFlowDao {
     ApplicationWorkFlow addApplicationWorkFlow(ApplicationWorkFlow applicationWorkFlow);
 
     ApplicationWorkFlow getApplicationWorkFlowByEmployeeId(int employeeId);
+
+    ApplicationWorkFlow updateApplicationWorkFlow (ApplicationWorkFlow applicationWorkFlow);
 }

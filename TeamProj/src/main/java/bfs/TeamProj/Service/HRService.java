@@ -81,10 +81,6 @@ public class HRService {
         return res;
     }
 
-    public Address foo(int id){
-        return addressService.getAddressById(id);
-    }
-
     public OnBoardDataHolder getApplicationDetailById(int employeeId) {
         Employee employee = employeeService.getEmployeeById(employeeId);
         Person person = personService.getPersonById(employee.getPerson().getId());
@@ -178,5 +174,18 @@ public class HRService {
         data.setEmergencyContact(emergencyContactList);
 
         return data;
+    }
+
+    public ApplicationWorkFlow updateApplicationWorkFlow(int employeeId, String status, String comments){
+        ApplicationWorkFlow current = applicationWorkFlowService.getApplicationWorkFlowByEmployeeId(employeeId);
+        ApplicationWorkFlow applicationWorkFlow = new ApplicationWorkFlow();
+        applicationWorkFlow.setStatus(status);
+        applicationWorkFlow.setModificationDate(LocalDate.now());
+        applicationWorkFlow.setComments(comments);
+        applicationWorkFlow.setId(current.getId());
+        applicationWorkFlow.setType(current.getType());
+        applicationWorkFlow.setCreatedDate(current.getCreatedDate());
+        applicationWorkFlow.setEmployee(current.getEmployee());
+       return applicationWorkFlowService.updateApplicationWorkFlow(applicationWorkFlow);
     }
 }

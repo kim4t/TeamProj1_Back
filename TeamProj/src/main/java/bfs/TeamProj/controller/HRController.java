@@ -52,16 +52,27 @@ public class HRController {
         return hrService.getAllApplication();
     }
 
-    @GetMapping("/applicationReview/detail")
-    public OnBoardDataHolder getApplicationDetailById(HttpServletResponse httpServletResponse, int employeeId, HttpServletRequest request) {
+    @PostMapping("/applicationReviewDetail")
+    public OnBoardDataHolder getApplicationDetailById(HttpServletResponse httpServletResponse, Integer employeeId, HttpServletRequest request) {
 //        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
 //        System.out.println(username);
 //        if(username == null) {
 //            return null;
 //        }
+        System.out.println(employeeId);
 
         return hrService.getApplicationDetailById(employeeId);
+    }
 
+    @PostMapping("/applicationReviewDetail/update")
+    public ApplicationWorkFlow changeStatus(HttpServletResponse httpServletResponse,int employeeId, String status, String comments){
+
+//        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
+//        System.out.println(username);
+//        if(username == null) {
+//            return null;
+//
+        return hrService.updateApplicationWorkFlow(employeeId,status,comments);
     }
 
 
