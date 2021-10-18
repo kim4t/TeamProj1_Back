@@ -32,6 +32,8 @@ public class setup implements CommandLineRunner {
     private PermissionService permissionService;
     @Autowired
     private ContactService contactService;
+    @Autowired
+    private AddressService addressService;
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -48,6 +50,17 @@ public class setup implements CommandLineRunner {
     }
 
     public void test(){
+
+
+        User user = userService.getUserByUserName("qqeq");
+        Person person = user.getPerson();
+        Employee employee = person.getEmployee();
+        System.out.println(employee.getTitle());
+
+        /*
+        Address address = addressService.getAddressById(1);
+        System.out.println(address.getAddressLine1());
+
         User user = userService.getUserByUserName("qqeq");
         Person p = user.getPerson();
         Employee emp = p.getEmployee();
@@ -75,6 +88,8 @@ public class setup implements CommandLineRunner {
         //Role role = roleService.getRoleById(userRole.getRole().getId());
         //System.out.println(role.getRoleName());
         //System.out.println(role.toString());
+        */
+
     }
 
     //used to remove all table from database

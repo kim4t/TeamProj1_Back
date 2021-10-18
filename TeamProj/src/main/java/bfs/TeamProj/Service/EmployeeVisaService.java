@@ -35,6 +35,8 @@ public class EmployeeVisaService {
         visaStage.setAwfId(applicationWorkFlow.getId());
         visaStage.setStatus(applicationWorkFlow.getStatus());
         visaStage.setType(applicationWorkFlow.getType());
+        visaStage.setVisaEndDate(employee.getVisaEndDate());
+        visaStage.setUploadedI983(false);
         employeeVisaInformation.setVisaStage(visaStage);
 
         //assemble sample document
@@ -51,26 +53,30 @@ public class EmployeeVisaService {
         //assemble visa document
         List<EmployeeVisaInformation.VisaDocument> visaDocumentList = new ArrayList<>();
         List<PersonalDocument> docList = employee.getPersonalDocumentList();
+        String temp = user.getUserName() + '_' + "I-983 file";
         for (PersonalDocument doc : docList) {
             EmployeeVisaInformation.VisaDocument document = new EmployeeVisaInformation.VisaDocument();
             document.setDocId(doc.getId());
             document.setPath(doc.getPath());
             document.setTitle(doc.getTitle());
-            document.setCreateDate(doc.getCreatedDate());
+            if (doc.getTitle().equals(temp)){
+                visaStage.setUploadedI983(true);
+            }
+                document.setCreateDate(doc.getCreatedDate());
             visaDocumentList.add(document);
         }
         employeeVisaInformation.setVisaDocumentList(visaDocumentList);
         return employeeVisaInformation;
     }
 
-    public EmployeeVisaInformation.VisaDocument uploadVisa(EmployeeVisaInformation.VisaDocument visaDocument, String username){
+    public EmployeeVisaInformation.VisaDocument uploadVisa(EmployeeVisaInformation.VisaDocument visaDocument, String username) {
         User user = userService.getUserByUserName(username);
         Person person = user.getPerson();
         Employee employee = person.getEmployee();
 
         PersonalDocument personalDocument = personalDocumentService.getPersonalDocumentByTitle(visaDocument.getTitle());
         System.out.println(personalDocument == null);
-        if(personalDocument == null) {
+        if (personalDocument == null) {
             personalDocument = new PersonalDocument();
             personalDocument.setEmployee(employee);
             personalDocument.setCreatedBy(username);
