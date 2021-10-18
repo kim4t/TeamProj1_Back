@@ -39,7 +39,7 @@ public class setup implements CommandLineRunner {
     private JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private AddressService addressService;
+    private HRService hrService;
 
 
     private static final Logger logger = LoggerFactory.getLogger(setup.class);
@@ -50,6 +50,7 @@ public class setup implements CommandLineRunner {
         //cleanAlltable();
         //dataSetUp();
         //test();
+
     }
 
     public void test(){

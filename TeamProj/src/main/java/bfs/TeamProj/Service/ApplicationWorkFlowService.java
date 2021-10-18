@@ -32,4 +32,9 @@ public class ApplicationWorkFlowService {
     public List<ApplicationWorkFlow> getAllApplicationWorkFlow(){
         return applicationWorkFlowDao.getAllApplicationWorkFlow();
     }
+
+    @Transactional
+    public ApplicationWorkFlow updateApplicationWorkFlow(ApplicationWorkFlow applicationWorkFlow){
+        return applicationWorkFlowDao.updateApplicationWorkFlow(applicationWorkFlow);
+    }
 }
