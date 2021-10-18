@@ -24,6 +24,8 @@ public class HomePageService {
     private VisaStatusService visaStatusService;
     @Autowired
     private PersonalDocumentService personalDocumentService;
+    @Autowired
+    private ApplicationWorkFlowService applicationWorkFlowService;
 
     public PersonalInformation.NameSection updateName(PersonalInformation.NameSection nameSection) {
         Person person = personService.getPersonById(nameSection.getPersonId());
@@ -63,10 +65,13 @@ public class HomePageService {
 
     public PersonalInformation.EmployeeSection updateEmployee(PersonalInformation.EmployeeSection employeeSection) {
         Employee employee = employeeService.getEmployeeById(employeeSection.getEmployeeId());
+        ApplicationWorkFlow applicationWorkFlow = employee.getApplicationWorkFlow();
         VisaStatus visaStatus = employee.getVisaStatus();
         visaStatus.setVisaType(employeeSection.getVisaType());
         visaStatus.setModificationDate(LocalDate.now());
         visaStatusService.updateVisaStatus(visaStatus);
+        applicationWorkFlow.setType(employeeSection.getVisaType());
+        applicationWorkFlowService.updateApplicationWorkFlow(applicationWorkFlow);
         employee.setVisaStartDate(employeeSection.getVisaStartDate());
         employee.setVisaEndDate(employeeSection.getVisaEndDate());
         employee.setStartDate(employeeSection.getStartDate());
@@ -94,7 +99,7 @@ public class HomePageService {
     public List<PersonalInformation.PersonalDocument> updateDocument(List<PersonalInformation.PersonalDocument> personalDocumentList) {
         for (PersonalInformation.PersonalDocument docSection : personalDocumentList) {
             PersonalDocument doc = personalDocumentService.getPersonalDocumentById(docSection.getDocId());
-            if(!doc.getPath().equals(docSection.getPath())){
+            if (!doc.getPath().equals(docSection.getPath())) {
                 doc.setCreatedDate(LocalDate.now());
                 docSection.setCreateDate(doc.getCreatedDate());
             }

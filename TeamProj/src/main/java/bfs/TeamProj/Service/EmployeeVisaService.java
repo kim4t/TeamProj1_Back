@@ -22,6 +22,8 @@ public class EmployeeVisaService {
     private VisaStatusService visaStatusService;
     @Autowired
     private PersonalDocumentService personalDocumentService;
+    @Autowired
+    private ApplicationWorkFlowService applicationWorkFlowService;
 
     public EmployeeVisaInformation assemble(String username) {
         EmployeeVisaInformation employeeVisaInformation = new EmployeeVisaInformation();
@@ -59,10 +61,10 @@ public class EmployeeVisaService {
             document.setDocId(doc.getId());
             document.setPath(doc.getPath());
             document.setTitle(doc.getTitle());
-            if (doc.getTitle().equals(temp)){
+            if (doc.getTitle().equals(temp)) {
                 visaStage.setUploadedI983(true);
             }
-                document.setCreateDate(doc.getCreatedDate());
+            document.setCreateDate(doc.getCreatedDate());
             visaDocumentList.add(document);
         }
         employeeVisaInformation.setVisaDocumentList(visaDocumentList);
@@ -75,7 +77,8 @@ public class EmployeeVisaService {
         Employee employee = person.getEmployee();
 
         PersonalDocument personalDocument = personalDocumentService.getPersonalDocumentByTitle(visaDocument.getTitle());
-        System.out.println(personalDocument == null);
+        //System.out.println("title: " + visaDocument.getTitle());
+        //System.out.println(personalDocument == null);
         if (personalDocument == null) {
             personalDocument = new PersonalDocument();
             personalDocument.setEmployee(employee);
@@ -87,5 +90,12 @@ public class EmployeeVisaService {
         personalDocument.setPath(visaDocument.getPath());
         personalDocumentService.updatePersonalDocument(personalDocument);
         return visaDocument;
+    }
+
+    public EmployeeVisaInformation.VisaStage newStep(EmployeeVisaInformation.VisaStage visaStage) {
+        ApplicationWorkFlow applicationWorkFlow = applicationWorkFlowService.getApplicationWorkFlowById(visaStage.getAwfId());
+        applicationWorkFlow.setType(visaStage.getType());
+        applicationWorkFlowService.updateApplicationWorkFlow(applicationWorkFlow);
+        return visaStage;
     }
 }

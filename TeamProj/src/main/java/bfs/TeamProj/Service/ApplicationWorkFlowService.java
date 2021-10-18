@@ -25,4 +25,9 @@ public class ApplicationWorkFlowService {
     public ApplicationWorkFlow getApplicationWorkFlowByEmployeeId(int employeeId) {
         return applicationWorkFlowDao.getApplicationWorkFlowByEmployeeId(employeeId);
     }
+
+    @Transactional
+    public ApplicationWorkFlow updateApplicationWorkFlow(ApplicationWorkFlow applicationWorkFlow) {
+        return applicationWorkFlowDao.updateApplicationWorkFlow(applicationWorkFlow);
+    }
 }
