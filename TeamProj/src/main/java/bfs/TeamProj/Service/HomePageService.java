@@ -22,6 +22,8 @@ public class HomePageService {
     private AddressService addressService;
     @Autowired
     private VisaStatusService visaStatusService;
+    @Autowired
+    private PersonalDocumentService personalDocumentService;
 
     public PersonalInformation.NameSection updateName(PersonalInformation.NameSection nameSection) {
         Person person = personService.getPersonById(nameSection.getPersonId());
@@ -38,7 +40,6 @@ public class HomePageService {
         employeeService.updateEmployee(employee);
         return nameSection;
     }
-
 
     public PersonalInformation.AddressSection updateAddress(PersonalInformation.AddressSection addressSection) {
         Address address = addressService.getAddressById(addressSection.getAddressId());
@@ -71,9 +72,37 @@ public class HomePageService {
         employee.setStartDate(employeeSection.getStartDate());
         employee.setEndDate(employeeSection.getEndDate());
         employee.setTitle(employee.getTitle());
+        employeeService.updateEmployee(employee);
         return employeeSection;
     }
 
+    public List<PersonalInformation.EmergencyContact> updateEmergency(List<PersonalInformation.EmergencyContact> emergencyContactList) {
+        for (PersonalInformation.EmergencyContact emgContact : emergencyContactList) {
+            Person person = personService.getPersonById(emgContact.getPersonId());
+            Contact contact = contactService.getContactById(person.getContact().getId());
+            contact.setRelationship(emgContact.getRelationship());
+            contactService.updateContact(contact);
+            person.setFirstName(emgContact.getFirstName());
+            person.setLastName(emgContact.getLastName());
+            person.setCellphone(emgContact.getCellphone());
+            person.setEmail(emgContact.getEmail());
+            personService.updatePerson(person);
+        }
+        return emergencyContactList;
+    }
+
+    public List<PersonalInformation.PersonalDocument> updateDocument(List<PersonalInformation.PersonalDocument> personalDocumentList) {
+        for (PersonalInformation.PersonalDocument docSection : personalDocumentList) {
+            PersonalDocument doc = personalDocumentService.getPersonalDocumentById(docSection.getDocId());
+            if(!doc.getPath().equals(docSection.getPath())){
+                doc.setCreatedDate(LocalDate.now());
+                docSection.setCreateDate(doc.getCreatedDate());
+            }
+            doc.setPath(docSection.getPath());
+            personalDocumentService.updatePersonalDocument(doc);
+        }
+        return personalDocumentList;
+    }
 
     public PersonalInformation assemble(String username) {
         User user = userService.getUserByUserName(username);

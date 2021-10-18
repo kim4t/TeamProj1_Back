@@ -51,6 +51,10 @@ public class Employee implements Serializable {
     @JoinColumn(name = "visaStatusId")
     private VisaStatus visaStatus;
 
+    @OneToOne(mappedBy = "employee")
+    private ApplicationWorkFlow applicationWorkFlow;
+
+
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY)
     private List<FacilityReport> facilityReportList = new ArrayList<>();
 

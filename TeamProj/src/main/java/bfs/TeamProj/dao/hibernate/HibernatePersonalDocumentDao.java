@@ -18,7 +18,22 @@ public class HibernatePersonalDocumentDao extends AbstractHibernateDAO<PersonalD
     }
 
     @Override
+    public PersonalDocument getPersonalDocumentById(int id) {
+        return findById(id);
+    }
+
+    @Override
     public List<PersonalDocument> getPersonalDocumentListByEmployeeId(int employeeId) {
-        return findByField("employeeId", employeeId);
+        return findALLByField("employeeId", employeeId);
+    }
+
+    @Override
+    public PersonalDocument updatePersonalDocument(PersonalDocument doc) {
+        return update(doc);
+    }
+
+    @Override
+    public PersonalDocument getPersonalDocumentByTitle(String title) {
+        return findByField("title", title);
     }
 }

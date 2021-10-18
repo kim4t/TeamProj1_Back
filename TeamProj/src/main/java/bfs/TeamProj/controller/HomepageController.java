@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
@@ -69,5 +70,17 @@ public class HomepageController {
         }
         homePageService.updateEmployee(employeeSection);
         return employeeSection;
+    }
+
+    @PostMapping("/update/emergency")
+    public List<PersonalInformation.EmergencyContact> updateEmergency(HttpServletRequest request, @RequestBody List<PersonalInformation.EmergencyContact> emergencyContactList) {
+        homePageService.updateEmergency(emergencyContactList);
+        return emergencyContactList;
+    }
+
+    @PostMapping("/update/document")
+    public List<PersonalInformation.PersonalDocument> updateDocument(@RequestBody List<PersonalInformation.PersonalDocument> personalDocumentList) {
+        homePageService.updateDocument(personalDocumentList);
+        return personalDocumentList;
     }
 }
