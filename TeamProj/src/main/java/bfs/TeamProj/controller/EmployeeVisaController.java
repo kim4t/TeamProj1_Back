@@ -3,7 +3,6 @@ package bfs.TeamProj.controller;
 import bfs.TeamProj.Service.EmployeeVisaService;
 import bfs.TeamProj.constant.Constant;
 import bfs.TeamProj.domain.EmployeeVisaInformation;
-import bfs.TeamProj.domain.PersonalInformation;
 import bfs.TeamProj.security.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

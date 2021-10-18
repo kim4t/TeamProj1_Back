@@ -16,6 +16,8 @@ public class EmployeeVisaInformation {
         private int awfId;
         private String status;
         private String type;
+        private LocalDate visaEndDate;
+        private boolean uploadedI983;
     }
 
     @Data
