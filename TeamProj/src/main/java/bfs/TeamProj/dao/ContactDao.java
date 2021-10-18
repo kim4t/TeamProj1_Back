@@ -12,4 +12,6 @@ public interface ContactDao {
     Contact getContactById(int id);
 
     List<Contact> getContactsByRefPersonId(int personId);
+
+    Contact updateContact (Contact contact);
 }

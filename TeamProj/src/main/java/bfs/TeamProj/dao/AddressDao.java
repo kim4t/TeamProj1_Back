@@ -12,4 +12,6 @@ public interface AddressDao {
     Address getAddressById(int id);
 
     Address getAddressByPersonId(int personId);
+
+    Address updateAddress(Address address);
 }

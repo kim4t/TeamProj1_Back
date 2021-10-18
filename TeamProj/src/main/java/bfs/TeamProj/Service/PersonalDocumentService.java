@@ -19,7 +19,22 @@ public class PersonalDocumentService {
     }
 
     @Transactional
-    public List<PersonalDocument> getPersonalDocumentListByEmployeeId(int personId){
+    public List<PersonalDocument> getPersonalDocumentListByEmployeeId(int personId) {
         return personalDocumentDao.getPersonalDocumentListByEmployeeId(personId);
+    }
+
+    @Transactional
+    public PersonalDocument getPersonalDocumentById(int id) {
+        return personalDocumentDao.getPersonalDocumentById(id);
+    }
+
+    @Transactional
+    public PersonalDocument updatePersonalDocument(PersonalDocument personalDocument) {
+        return personalDocumentDao.updatePersonalDocument(personalDocument);
+    }
+
+    @Transactional
+    public PersonalDocument getPersonalDocumentByTitle(String title) {
+        return personalDocumentDao.getPersonalDocumentByTitle(title);
     }
 }

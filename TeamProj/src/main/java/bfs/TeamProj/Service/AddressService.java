@@ -32,4 +32,10 @@ public class AddressService {
     public Address getAddressByPersonId(int personId) {
         return addressDao.getAddressByPersonId(personId);
     }
+
+    @Transactional
+    public Address updateAddress(Address address) {
+        return addressDao.updateAddress(address);
+    }
+
 }

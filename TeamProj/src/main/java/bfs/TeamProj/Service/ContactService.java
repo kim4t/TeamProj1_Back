@@ -32,4 +32,9 @@ public class ContactService {
     public List<Contact> getContactsByRefPersonId(int personId) {
         return contactDao.getContactsByRefPersonId(personId);
     }
+
+    @Transactional
+    public Contact updateContact(Contact contact) {
+        return contactDao.updateContact(contact);
+    }
 }

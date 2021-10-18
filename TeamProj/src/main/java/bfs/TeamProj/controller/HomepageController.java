@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RestController
 @RequestMapping("/employee")
@@ -38,5 +39,48 @@ public class HomepageController {
         return nameSection;
     }
 
+    @PostMapping("/update/address")
+    public PersonalInformation.AddressSection updateAddress(HttpServletRequest request, @RequestBody PersonalInformation.AddressSection addressSection) {
+        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
+        System.out.println(username);
+        if (username == null) {
+            return null;
+        }
+        homePageService.updateAddress(addressSection);
+        return addressSection;
+    }
 
+    @PostMapping("/update/contact")
+    public PersonalInformation.ContactSection updateContact(HttpServletRequest request, @RequestBody PersonalInformation.ContactSection contactSection) {
+        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
+        System.out.println(username);
+        if (username == null) {
+            return null;
+        }
+        homePageService.updateContact(contactSection);
+        return contactSection;
+    }
+
+    @PostMapping("/update/employee")
+    public PersonalInformation.EmployeeSection updateEmployee(HttpServletRequest request, @RequestBody PersonalInformation.EmployeeSection employeeSection) {
+        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
+        System.out.println(username);
+        if (username == null) {
+            return null;
+        }
+        homePageService.updateEmployee(employeeSection);
+        return employeeSection;
+    }
+
+    @PostMapping("/update/emergency")
+    public List<PersonalInformation.EmergencyContact> updateEmergency(HttpServletRequest request, @RequestBody List<PersonalInformation.EmergencyContact> emergencyContactList) {
+        homePageService.updateEmergency(emergencyContactList);
+        return emergencyContactList;
+    }
+
+    @PostMapping("/update/document")
+    public List<PersonalInformation.PersonalDocument> updateDocument(@RequestBody List<PersonalInformation.PersonalDocument> personalDocumentList) {
+        homePageService.updateDocument(personalDocumentList);
+        return personalDocumentList;
+    }
 }
