@@ -5,10 +5,10 @@ public interface Constant {
     String SIGNING_KEY = "signingKey";
     String DEFAULT_AVATAR = "default avatar";
 
-    String ONBOARD_PENDING = "Onboard Pending";
-    String ONBOARD_REJECTED = "Onboard Rejected";
-    String ONBOARD_COMPLETED = "Onboard Completed";
-    String OPT_PENDING = "OPT Pending";
-    String OPT_REJECTED = "OPT Rejected";
-    String OPT_COMPLETED = "OPT Completed";
+    String ONBOARD_PENDING = "Onboard pending";
+    String ONBOARD_REJECTED = "Onboard rejected";
+    String ONBOARD_COMPLETED = "Onboard completed";
+    String OPT_PENDING = "OPT pending";
+    String OPT_REJECTED = "OPT rejected";
+    String OPT_COMPLETED = "OPT completed";
 }
