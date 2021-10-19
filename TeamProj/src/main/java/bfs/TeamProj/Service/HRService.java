@@ -56,9 +56,16 @@ public class HRService {
             statusProfile.setLastName(p.getLastName());
             statusProfile.setMiddleName(p.getMiddleName());
             statusProfile.setVisaEndDate(e.getVisaEndDate());
-            statusProfile.setDayLeft(
-                    (int) (e.getVisaEndDate().toEpochDay() - LocalDate.now().toEpochDay())
-            );
+            if(e.getVisaStatus().getVisaType().equals("Green Card") || e.getVisaStatus().getVisaType().equals("Citizen")){
+                System.out.println("hi");
+                statusProfile.setDayLeft(9999999);
+            }
+            else{
+                statusProfile.setDayLeft(
+                        (int) (e.getVisaEndDate().toEpochDay() - LocalDate.now().toEpochDay())
+                );
+            }
+
             statusProfile.setStatus(
                     applicationWorkFlowService.getApplicationWorkFlowByEmployeeId(e.getId()).getStatus()
             );
@@ -206,6 +213,7 @@ public class HRService {
     public List<DocumentationReviewForm> getPersonalDocumentListByEmployeeId(int employeeId,String title){
         List<DocumentationReviewForm> res = new ArrayList<>();
         List<PersonalDocument> documentList = personalDocumentService.getPersonalDocumentListByEmployeeId(employeeId);
+        System.out.println("title is: "+title);
         for(PersonalDocument pd : documentList){
             if(pd.getTitle().equals(title)) {
                 DocumentationReviewForm dc = new DocumentationReviewForm();
