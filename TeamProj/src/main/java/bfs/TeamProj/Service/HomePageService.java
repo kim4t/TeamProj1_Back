@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import static bfs.TeamProj.constant.Constant.*;
+
 @Service
 public class HomePageService {
     @Autowired
@@ -71,6 +73,7 @@ public class HomePageService {
         visaStatus.setModificationDate(LocalDate.now());
         visaStatusService.updateVisaStatus(visaStatus);
         applicationWorkFlow.setType(employeeSection.getVisaType());
+        applicationWorkFlow.setStatus(OPT_COMPLETED);
         applicationWorkFlowService.updateApplicationWorkFlow(applicationWorkFlow);
         employee.setVisaStartDate(employeeSection.getVisaStartDate());
         employee.setVisaEndDate(employeeSection.getVisaEndDate());
@@ -244,7 +247,7 @@ public class HomePageService {
         Person person = personService.getPersonById(personalInformation.getNameSection().getPersonId());
         Employee employee = employeeService.getEmployeeById(person.getEmployee().getId());
         ApplicationWorkFlow applicationWorkFlow = applicationWorkFlowService.getApplicationWorkFlowById(employee.getApplicationWorkFlow().getId());
-        applicationWorkFlow.setStatus("Onboarding");
+        applicationWorkFlow.setStatus(ONBOARD_PENDING);
         applicationWorkFlowService.updateApplicationWorkFlow(applicationWorkFlow);
         //update reference person
         PersonalInformation.ReferencePerson referencePersonSection = personalInformation.getReferencePerson();

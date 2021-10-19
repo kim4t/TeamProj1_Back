@@ -16,6 +16,7 @@ public class EmployeeVisaInformation {
         private int awfId;
         private String status;
         private String type;
+        private String comment;
         private LocalDate visaEndDate;
         private boolean uploadedI983;
     }

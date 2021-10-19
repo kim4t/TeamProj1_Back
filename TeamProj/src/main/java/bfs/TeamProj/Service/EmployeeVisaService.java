@@ -3,7 +3,7 @@ package bfs.TeamProj.Service;
 import bfs.TeamProj.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import static bfs.TeamProj.constant.Constant.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +38,7 @@ public class EmployeeVisaService {
         visaStage.setStatus(applicationWorkFlow.getStatus());
         visaStage.setType(applicationWorkFlow.getType());
         visaStage.setVisaEndDate(employee.getVisaEndDate());
+        visaStage.setComment(applicationWorkFlow.getComments());
         visaStage.setUploadedI983(false);
         employeeVisaInformation.setVisaStage(visaStage);
 
@@ -75,20 +76,26 @@ public class EmployeeVisaService {
         User user = userService.getUserByUserName(username);
         Person person = user.getPerson();
         Employee employee = person.getEmployee();
-
-        PersonalDocument personalDocument = personalDocumentService.getPersonalDocumentByTitle(visaDocument.getTitle());
-        //System.out.println("title: " + visaDocument.getTitle());
-        //System.out.println(personalDocument == null);
-        if (personalDocument == null) {
-            personalDocument = new PersonalDocument();
+        ApplicationWorkFlow applicationWorkFlow = employee.getApplicationWorkFlow();
+        List<PersonalDocument> personalDocumentList = employee.getPersonalDocumentList();
+        //PersonalDocument personalDocument = personalDocumentService.getPersonalDocumentByTitle(visaDocument.getTitle());
+        PersonalDocument personalDocument = new PersonalDocument();
+        for (PersonalDocument doc : personalDocumentList) {
+            if (doc.getTitle().equals(visaDocument.getTitle())) {
+                personalDocument = doc;
+                break;
+            }
+        }
+        if (personalDocument.getTitle() == null) {
             personalDocument.setEmployee(employee);
             personalDocument.setCreatedBy(username);
         }
         personalDocument.setCreatedDate(LocalDate.now());
         personalDocument.setTitle(visaDocument.getTitle());
-        personalDocument.setComment(visaDocument.getTitle());
         personalDocument.setPath(visaDocument.getPath());
         personalDocumentService.updatePersonalDocument(personalDocument);
+        applicationWorkFlow.setStatus(OPT_PENDING);
+        applicationWorkFlowService.updateApplicationWorkFlow(applicationWorkFlow);
         return visaDocument;
     }
 
