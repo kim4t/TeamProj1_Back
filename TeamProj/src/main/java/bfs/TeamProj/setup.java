@@ -2,6 +2,7 @@ package bfs.TeamProj;
 
 import bfs.TeamProj.Service.*;
 
+import bfs.TeamProj.constant.Constant;
 import bfs.TeamProj.domain.*;
 
 import org.slf4j.Logger;
@@ -15,6 +16,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+
+import static bfs.TeamProj.constant.Constant.ONBOARD_PENDING;
 
 @Component
 public class setup implements CommandLineRunner {
@@ -40,7 +43,12 @@ public class setup implements CommandLineRunner {
 
     @Autowired
     private HRService hrService;
-
+    @Autowired
+    private EmployeeService employeeService;
+    @Autowired
+    private ApplicationWorkFlowService applicationWorkFlowService;
+    @Autowired
+    private PersonalDocumentService personalDocumentService;
 
     private static final Logger logger = LoggerFactory.getLogger(setup.class);
 
@@ -120,7 +128,7 @@ public class setup implements CommandLineRunner {
 
 
     public void dataSetUp() {
-        logger.info("start to insert data");
+        logger.info("start to insert setup data");
 
 
         //set up HR role and permission
@@ -179,34 +187,122 @@ public class setup implements CommandLineRunner {
             permissionService.addRolePermission(rolePermission);
         }
 
-
-
-
-/*
-
         User u = new User();
-        u.setUserName("bruceshen");
-        u.setPassword("password123");
-        u.setEmail("email1@gmail.com");
+        u.setUserName("admin");
+        u.setPassword("admin");
+        u.setEmail("admin@gmail.com");
         u.setCreateDate(LocalDate.now());
         u.setModificationDate(LocalDate.now());
         userService.addUser(u);
-        u = userService.getUserByEmail("email1@gmail.com");
+        u = userService.getUserByEmail(u.getEmail());
+
+
+        //Set the role of this user (Done)
+        role = roleService.getRoleByName("HR");
+        UserRole userRole = new UserRole();
+        userRole.setRole(role);
+        userRole.setUser(u);
+        userRole.setActiveFlag(true);
+        userRole.setLastModificationUser("admin");
+        userRole.setModificationDate(LocalDate.now());
+        roleService.addUserRole(userRole);
 
         Person p = new Person();
-        p.setFirstName("Xianli");
-        p.setLastName("Shen");
-        p.setEmail("email1@gmail.com");
-        p.setCellphone("12342313");
-        p.setGender("M");
-        p.setSSN("45643242");
-        p.setDOB("890423423");
+        p.setFirstName("admin");
+        p.setLastName("admin");
+        p.setEmail(u.getEmail());
+        p.setCellphone("1234567890");
+        p.setGender("I don't want to answer");
+        p.setSSN("012345678");
+        p.setDOB("1970-01-01");
         p = personService.addPerson(p);
 
         u.setPerson(p);
         u = userService.updateUser(u);
 
+        Address employeeAddress = new Address();
+        employeeAddress.setPerson(p);
+        employeeAddress.setAddressLine1("admin address");
+        employeeAddress.setAddressLine2("admin address line2");
+        employeeAddress.setCity("admin city");
+        employeeAddress.setStateAbbr("AL");
+        employeeAddress.setStateName("Alabama");
+        employeeAddress.setZipCode("35242");
+        addressService.addAddress(employeeAddress);
 
+        VisaStatus visaStatus = new VisaStatus();
+        visaStatus.setActive(true);
+        visaStatus.setCreateUser(u.getUserName());
+        visaStatus.setModificationDate(LocalDate.now());
+        visaStatus.setVisaType("Green Card");
+        visaStatus = visaStatusService.addVisaStatus(visaStatus);
+
+        //add employee information (may have mistake)
+        Employee emp = new Employee();
+        emp.setPerson(p);
+        emp.setVisaStatus(visaStatus);
+        emp.setAvatar(Constant.DEFAULT_AVATAR);
+        emp.setCar("Audi_Q7_Black");
+        emp.setDriverLicense("12345678");
+        emp.setDriverLicenseExpirationDate(LocalDate.now().plusYears(5));
+        emp.setStartDate(LocalDate.now());
+        emp.setEndDate(LocalDate.now().plusYears(1));
+        emp.setManagerId(0);
+        emp.setTitle("HR");
+        emp = employeeService.addEmployee(emp);
+
+        //add user's application work flow information
+        ApplicationWorkFlow aWF = new ApplicationWorkFlow();
+        aWF.setEmployee(emp);
+        aWF.setComments("empty");
+        aWF.setCreatedDate(LocalDate.now());
+        aWF.setModificationDate(LocalDate.now());
+        aWF.setStatus(ONBOARD_PENDING);
+        aWF.setType("Green Card");
+        applicationWorkFlowService.addApplicationWorkFlow(aWF);
+
+        PersonalDocument dLDoc = new PersonalDocument();
+        dLDoc.setComment("default");
+        dLDoc.setCreatedBy(u.getUserName());
+        dLDoc.setCreatedDate(LocalDate.now());
+        dLDoc.setPath("https://proj-angular-bucket.s3.us-east-2.amazonaws.com/HR+Driver+License+file.docx");
+        dLDoc.setTitle("Driver License file");
+        dLDoc.setEmployee(emp);
+        personalDocumentService.addPersonalDocument(dLDoc);
+
+        PersonalDocument workAuthDoc = new PersonalDocument();
+        workAuthDoc.setComment("default");
+        workAuthDoc.setCreatedBy(u.getUserName());
+        workAuthDoc.setCreatedDate(LocalDate.now());
+        workAuthDoc.setPath("https://proj-angular-bucket.s3.us-east-2.amazonaws.com/HR+work+authorization+file.docx");
+        workAuthDoc.setTitle("work authorization file");
+        workAuthDoc.setEmployee(emp);
+        personalDocumentService.addPersonalDocument(workAuthDoc);
+
+
+        Person person = new Person();
+        person.setFirstName("Sandy");
+        person.setLastName("Mcdaniel");
+        person.setCellphone("2221113333");
+        person.setEmail("ref@gmail.com");
+        person.setGender("NA");
+        person.setDOB("NA");
+        person.setSSN("NA");
+        person = personService.addPerson(person);
+
+        Contact contact = new Contact();
+        contact.setPerson(person);
+        contact.setIsEmergency(true);
+        contact.setIsLandLord(false);
+        contact.setIsReference(false);
+        contact.setRelationship("friend");
+        contact.setTitle("emergency");
+        contact.setPerson2(p);
+        contactService.addContact(contact);
+
+
+
+/*
       Person p = new Person();
         p.setFirstName("name1");
         p.setLastName("name2");
