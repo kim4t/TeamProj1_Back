@@ -19,8 +19,6 @@ public class HRController {
     @Autowired
     private HRService hrService;
 
-    //@Autowired
-    //private HouseService houseService;
 
     @GetMapping("/employeeProfile")
     public List<EmployeeProfile> getAllEmployeeProfile(HttpServletRequest request) {
@@ -36,7 +34,7 @@ public class HRController {
     public List<StatusProfile> getAllStatusProfile(HttpServletRequest request) {
 //        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
 //        System.out.println(username);
-//        if(username == null) {
+//        if (username == null) {
 //            return null;
 //        }
         return hrService.getAllStatusProfile();
@@ -46,7 +44,7 @@ public class HRController {
     public List<ApplicationForm> getAllApplication(HttpServletRequest request) {
 //        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
 //        System.out.println(username);
-//        if(username == null) {
+//        if (username == null) {
 //            return null;
 //        }
         return hrService.getAllApplication();
@@ -56,7 +54,7 @@ public class HRController {
     public OnBoardDataHolder getApplicationDetailById(HttpServletResponse httpServletResponse, Integer employeeId, HttpServletRequest request) {
 //        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
 //        System.out.println(username);
-//        if(username == null) {
+//        if (username == null) {
 //            return null;
 //        }
         System.out.println(employeeId);
@@ -65,18 +63,44 @@ public class HRController {
     }
 
     @PostMapping("/applicationReviewDetail/update")
-    public ApplicationWorkFlow changeStatus(HttpServletResponse httpServletResponse,int employeeId, String status, String comments){
+    public ApplicationWorkFlow changeStatus(HttpServletResponse httpServletResponse,
+                                            int employeeId, String status, String comments, HttpServletRequest request) {
 
 //        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
 //        System.out.println(username);
-//        if(username == null) {
+//        if (username == null) {
 //            return null;
-//
-        return hrService.updateApplicationWorkFlow(employeeId,status,comments);
+//        }
+        System.out.println();
+        System.out.println(comments);
+        return hrService.updateApplicationWorkFlow(employeeId, status, comments);
     }
 
+    @PostMapping("/documentationReviewDetail")
+    public List<DocumentationReviewForm> getApplicationDtailById(HttpServletResponse httpServletResponse, Integer employeeId, String title, HttpServletRequest request) {
+//        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
+//        System.out.println(username);
+//        if (username == null) {
+//            return null;
+//        }
+        System.out.println(employeeId);
 
+        return hrService.getPersonalDocumentListByEmployeeId(employeeId,title);
+    }
 
+    @PostMapping("/documentationReviewDetail/update")
+    public ApplicationWorkFlow changeOptStatus(HttpServletResponse httpServletResponse,
+                                            int employeeId, String status, String comments, String type, HttpServletRequest request) {
+
+//        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
+//        System.out.println(username);
+//        if (username == null) {
+//            return null;
+//        }
+        System.out.println();
+        System.out.println(comments);
+        return hrService.updateOptApplicationWorkFlow(employeeId, status, comments, type);
+    }
 //    @GetMapping("/visaStatusManagement")
 //    public String foo(HttpServletRequest request) {
 //        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
@@ -86,6 +110,4 @@ public class HRController {
 //        }
 //        return null;
 //    }
-
-
 }

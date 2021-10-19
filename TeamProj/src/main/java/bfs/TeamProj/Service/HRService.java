@@ -188,4 +188,34 @@ public class HRService {
         applicationWorkFlow.setEmployee(current.getEmployee());
        return applicationWorkFlowService.updateApplicationWorkFlow(applicationWorkFlow);
     }
+
+    public ApplicationWorkFlow updateOptApplicationWorkFlow(int employeeId, String status, String comments, String type){
+        ApplicationWorkFlow current = applicationWorkFlowService.getApplicationWorkFlowByEmployeeId(employeeId);
+        ApplicationWorkFlow applicationWorkFlow = new ApplicationWorkFlow();
+        applicationWorkFlow.setStatus(status);
+        applicationWorkFlow.setModificationDate(LocalDate.now());
+        applicationWorkFlow.setComments(comments);
+        applicationWorkFlow.setId(current.getId());
+        applicationWorkFlow.setType(type);
+        applicationWorkFlow.setCreatedDate(current.getCreatedDate());
+        applicationWorkFlow.setEmployee(current.getEmployee());
+        return applicationWorkFlowService.updateApplicationWorkFlow(applicationWorkFlow);
+    }
+
+
+    public List<DocumentationReviewForm> getPersonalDocumentListByEmployeeId(int employeeId,String title){
+        List<DocumentationReviewForm> res = new ArrayList<>();
+        List<PersonalDocument> documentList = personalDocumentService.getPersonalDocumentListByEmployeeId(employeeId);
+        for(PersonalDocument pd : documentList){
+            if(pd.getTitle().equals(title)) {
+                DocumentationReviewForm dc = new DocumentationReviewForm();
+                dc.setId(pd.getId());
+                dc.setPath(pd.getPath());
+                dc.setTitle(pd.getTitle());
+                res.add(dc);
+            }
+        }
+
+        return res;
+    }
 }
