@@ -4,6 +4,7 @@ import bfs.TeamProj.constant.Constant;
 import bfs.TeamProj.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import static bfs.TeamProj.constant.Constant.*;
 
 import java.time.LocalDate;
 
@@ -113,7 +114,7 @@ public class OnBoardService {
         aWF.setComments("empty");
         aWF.setCreatedDate(LocalDate.now());
         aWF.setModificationDate(LocalDate.now());
-        aWF.setStatus("Onboarding");
+        aWF.setStatus(ONBOARD_PENDING);
         aWF.setType(holder.getVisaType());
         applicationWorkFlowService.addApplicationWorkFlow(aWF);
 
