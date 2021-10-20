@@ -2,6 +2,7 @@ package bfs.TeamProj.Service;
 
 import bfs.TeamProj.dao.PersonDao;
 import bfs.TeamProj.domain.Person;
+import bfs.TeamProj.exception.AgeInvalidException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,7 +15,7 @@ public class PersonService {
     private PersonDao personDao;
 
     @Transactional
-    public Person addPerson(Person p) {
+    public Person addPerson(Person p) throws AgeInvalidException {
         return personDao.addPerson(p);
     }
 
@@ -29,7 +30,7 @@ public class PersonService {
     }
 
     @Transactional
-    public Person updatePerson(Person p) {
+    public Person updatePerson(Person p) throws AgeInvalidException {
         return personDao.updatePerson(p);
     }
 }

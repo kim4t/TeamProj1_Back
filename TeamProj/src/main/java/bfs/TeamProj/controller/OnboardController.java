@@ -3,6 +3,7 @@ package bfs.TeamProj.controller;
 import bfs.TeamProj.Service.*;
 import bfs.TeamProj.constant.Constant;
 import bfs.TeamProj.domain.*;
+import bfs.TeamProj.exception.AgeInvalidException;
 import bfs.TeamProj.security.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class OnboardController {
     private HomePageService homePageService;
 
     @PostMapping(path = "/onboard")
-    public String onBoard(@RequestBody OnBoardDataHolder onBoardDataHolder) {
+    public String onBoard(@RequestBody OnBoardDataHolder onBoardDataHolder) throws AgeInvalidException {
         return onBoardService.assemble(onBoardDataHolder);
 //        System.out.println(onBoardDataHolder.toString());
 //        return onBoardDataHolder.toString();
@@ -36,7 +37,7 @@ public class OnboardController {
     }
 
     @PostMapping(path ="/onboard/update")
-    public PersonalInformation reOnboard(@RequestBody PersonalInformation personalInformation) {
+    public PersonalInformation reOnboard(@RequestBody PersonalInformation personalInformation) throws AgeInvalidException {
         return homePageService.reOnboard(personalInformation);
     }
 

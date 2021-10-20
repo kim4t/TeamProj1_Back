@@ -3,6 +3,7 @@ package bfs.TeamProj.controller;
 import bfs.TeamProj.Service.HomePageService;
 import bfs.TeamProj.constant.Constant;
 import bfs.TeamProj.domain.PersonalInformation;
+import bfs.TeamProj.exception.AgeInvalidException;
 import bfs.TeamProj.security.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,7 @@ public class HomepageController {
     }
 
     @PostMapping("/update/name")
-    public PersonalInformation.NameSection updateName(HttpServletRequest request, @RequestBody PersonalInformation.NameSection nameSection) {
+    public PersonalInformation.NameSection updateName(HttpServletRequest request, @RequestBody PersonalInformation.NameSection nameSection) throws AgeInvalidException {
         String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
         System.out.println(username);
         if (username == null) {
@@ -51,7 +52,7 @@ public class HomepageController {
     }
 
     @PostMapping("/update/contact")
-    public PersonalInformation.ContactSection updateContact(HttpServletRequest request, @RequestBody PersonalInformation.ContactSection contactSection) {
+    public PersonalInformation.ContactSection updateContact(HttpServletRequest request, @RequestBody PersonalInformation.ContactSection contactSection) throws AgeInvalidException {
         String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
         System.out.println(username);
         if (username == null) {
@@ -73,7 +74,7 @@ public class HomepageController {
     }
 
     @PostMapping("/update/emergency")
-    public List<PersonalInformation.EmergencyContact> updateEmergency(HttpServletRequest request, @RequestBody List<PersonalInformation.EmergencyContact> emergencyContactList) {
+    public List<PersonalInformation.EmergencyContact> updateEmergency(HttpServletRequest request, @RequestBody List<PersonalInformation.EmergencyContact> emergencyContactList) throws AgeInvalidException {
         homePageService.updateEmergency(emergencyContactList);
         return emergencyContactList;
     }

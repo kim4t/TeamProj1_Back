@@ -1,6 +1,7 @@
 package bfs.TeamProj.Service;
 
 import bfs.TeamProj.domain.*;
+import bfs.TeamProj.exception.AgeInvalidException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,7 @@ public class HomePageService {
     @Autowired
     private ApplicationWorkFlowService applicationWorkFlowService;
 
-    public PersonalInformation.NameSection updateName(PersonalInformation.NameSection nameSection) {
+    public PersonalInformation.NameSection updateName(PersonalInformation.NameSection nameSection) throws AgeInvalidException {
         Person person = personService.getPersonById(nameSection.getPersonId());
         Employee employee = employeeService.getEmployeeById(person.getEmployee().getId());
         System.out.println(employee.getAvatar());
@@ -57,7 +58,7 @@ public class HomePageService {
         return addressSection;
     }
 
-    public PersonalInformation.ContactSection updateContact(PersonalInformation.ContactSection contactSection) {
+    public PersonalInformation.ContactSection updateContact(PersonalInformation.ContactSection contactSection) throws AgeInvalidException {
         Person person = personService.getPersonById(contactSection.getPersonId());
         person.setCellphone(contactSection.getCellphone());
         person.setAlternatePhone(contactSection.getAlternatePhone());
@@ -87,7 +88,7 @@ public class HomePageService {
         return employeeSection;
     }
 
-    public List<PersonalInformation.EmergencyContact> updateEmergency(List<PersonalInformation.EmergencyContact> emergencyContactList) {
+    public List<PersonalInformation.EmergencyContact> updateEmergency(List<PersonalInformation.EmergencyContact> emergencyContactList) throws AgeInvalidException {
         for (PersonalInformation.EmergencyContact emgContact : emergencyContactList) {
             Person person = personService.getPersonById(emgContact.getPersonId());
             Contact contact = contactService.getContactById(person.getContact().getId());
@@ -230,7 +231,7 @@ public class HomePageService {
         return info;
     }
 
-    public PersonalInformation reOnboard(PersonalInformation personalInformation) {
+    public PersonalInformation reOnboard(PersonalInformation personalInformation) throws AgeInvalidException {
         //name section
         updateName(personalInformation.getNameSection());
         //address section

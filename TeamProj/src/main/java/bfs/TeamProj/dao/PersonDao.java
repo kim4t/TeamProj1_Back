@@ -1,6 +1,7 @@
 package bfs.TeamProj.dao;
 
 import bfs.TeamProj.domain.Person;
+import bfs.TeamProj.exception.AgeInvalidException;
 
 import java.util.List;
 
@@ -9,8 +10,8 @@ public interface PersonDao {
 
     List<Person> getALlPerson();
 
-    Person addPerson(Person person);
+    Person addPerson(Person person) throws AgeInvalidException;
 
-    Person updatePerson(Person person);
+    Person updatePerson(Person person) throws AgeInvalidException;
 
 }

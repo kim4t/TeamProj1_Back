@@ -2,6 +2,7 @@ package bfs.TeamProj.Service;
 
 import bfs.TeamProj.constant.Constant;
 import bfs.TeamProj.domain.*;
+import bfs.TeamProj.exception.AgeInvalidException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import static bfs.TeamProj.constant.Constant.*;
@@ -29,7 +30,7 @@ public class OnBoardService {
     @Autowired
     private ContactService contactService;
 
-    public String assemble(OnBoardDataHolder holder) {
+    public String assemble(OnBoardDataHolder holder) throws AgeInvalidException {
         String email = holder.getEmail();
         User u = userService.getUserByEmail(email);
         if (u == null) {

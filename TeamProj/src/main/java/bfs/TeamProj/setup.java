@@ -5,6 +5,7 @@ import bfs.TeamProj.Service.*;
 import bfs.TeamProj.constant.Constant;
 import bfs.TeamProj.domain.*;
 
+import bfs.TeamProj.exception.AgeInvalidException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,8 @@ public class setup implements CommandLineRunner {
     private ApplicationWorkFlowService applicationWorkFlowService;
     @Autowired
     private PersonalDocumentService personalDocumentService;
+    @Autowired
+    private RegistrationTokenService registrationTokenService;
 
     private static final Logger logger = LoggerFactory.getLogger(setup.class);
 
@@ -57,9 +60,32 @@ public class setup implements CommandLineRunner {
 
         //cleanAlltable();
         //dataSetUp();
-        //test();
+        aopLogging();
 
     }
+
+
+    public void aopLogging(){
+        logger.info("IN: ", this.getClass());
+        //List<Person> personList = personService.getAllPerson();
+
+        /*
+        User u = new User();
+        u.setUserName("bruceshen");
+        u.setPassword("123456");
+        u.setEmail("test@gmail.com");
+        u.setCreateDate(LocalDate.now());
+        u.setModificationDate(LocalDate.now());
+        userService.addUser(u);
+        */
+
+        //Role role = roleService.getRoleByName("employee");
+
+        //List<RegistrationToken> registrationTokenList = registrationTokenService.getAllToken();
+        List<Address> addressList = addressService.getAllAddress();
+    }
+
+
 
     public void test(){
 
@@ -67,7 +93,10 @@ public class setup implements CommandLineRunner {
         User user = userService.getUserByUserName("qqeq");
         Person person = user.getPerson();
         Employee employee = person.getEmployee();
-        System.out.println(employee.getTitle());
+        List<PersonalDocument> personalDocumentList = employee.getPersonalDocumentList();
+        for(PersonalDocument doc:personalDocumentList){
+            System.out.println(doc.getTitle());
+        }
 
         /*
         Address address = addressService.getAddressById(1);
@@ -127,7 +156,7 @@ public class setup implements CommandLineRunner {
     }
 
 
-    public void dataSetUp() {
+    public void dataSetUp() throws AgeInvalidException {
         logger.info("start to insert setup data");
 
 
