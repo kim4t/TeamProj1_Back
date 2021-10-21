@@ -1,11 +1,9 @@
 package bfs.TeamProj.Service;
 
-import bfs.TeamProj.dao.PersonDao;
+import bfs.TeamProj.aop.TrackExecutionTime;
 import bfs.TeamProj.dao.RoleDao;
 import bfs.TeamProj.dao.UserDao;
 import bfs.TeamProj.dao.UserRoleDao;
-import bfs.TeamProj.domain.Person;
-import bfs.TeamProj.domain.Role;
 import bfs.TeamProj.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,13 +24,20 @@ public class UserService {
         return userDao.addUser(user);
     }
 
+
     @Transactional
-    public User getUserById(int id) {
+    public User getUserById(int id) throws Exception  {
+        User u = userDao.getUserById(id);
+        if(u==null){
+            throw new Exception("User not exist");
+        }
         return userDao.getUserById(id);
     }
 
+    @TrackExecutionTime
     @Transactional
     public User getUserByEmail(String email) {
+
         return userDao.getUserByEmail(email);
     }
 

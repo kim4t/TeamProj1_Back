@@ -12,4 +12,6 @@ public interface UserDao {
     User addUser(User user);
 
     User updateUser(User user);
+
+    void test();
 }

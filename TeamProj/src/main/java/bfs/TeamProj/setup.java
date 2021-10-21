@@ -3,6 +3,8 @@ package bfs.TeamProj;
 import bfs.TeamProj.Service.*;
 
 import bfs.TeamProj.constant.Constant;
+import bfs.TeamProj.dao.UserDao;
+import bfs.TeamProj.dao.hibernate.HibernateUserDao;
 import bfs.TeamProj.domain.*;
 
 import org.slf4j.Logger;
@@ -12,12 +14,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
-
-import static bfs.TeamProj.constant.Constant.ONBOARD_PENDING;
 
 @Component
 public class setup implements CommandLineRunner {
@@ -58,9 +58,40 @@ public class setup implements CommandLineRunner {
         //cleanAlltable();
         //dataSetUp();
         //test();
+        //javaAop();
+        ///springAop();
+       springAopException();
+    }
+    @Autowired
+    UserDao userDao;
+    // JAVA AOP
+    public void javaAop(){
 
+        //UserDao userDao = new HibernateUserDao();
+        UserDao proxy = (UserDao) Proxy.newProxyInstance(HibernateUserDao.class.getClassLoader(),
+                new Class[]{UserDao.class}, new InvocationHandler() {
+                    @Override
+                    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                        long start = System.currentTimeMillis();
+                        System.out.println("Reading DB...");
+                        Object result = method.invoke(userDao,args);
+                        long end = System.currentTimeMillis();
+                        System.out.println("Completed...");
+                        System.out.println("Took "+ (end-start)+" times");
+                        return result;
+                    }
+                });
+        proxy.getUserByEmail("taetaehokim@gmail.com");
     }
 
+
+    public void springAop(){
+        userService.getUserByEmail("taetaehokim@gmail.com");
+    }
+
+    public void springAopException() throws Exception {
+        User u = userService.getUserById(15);
+    }
     public void test(){
 
 
@@ -257,7 +288,7 @@ public class setup implements CommandLineRunner {
         aWF.setComments("empty");
         aWF.setCreatedDate(LocalDate.now());
         aWF.setModificationDate(LocalDate.now());
-        aWF.setStatus(ONBOARD_PENDING);
+        aWF.setStatus("completed");
         aWF.setType("Green Card");
         applicationWorkFlowService.addApplicationWorkFlow(aWF);
 
