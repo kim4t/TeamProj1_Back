@@ -5,6 +5,9 @@ import bfs.TeamProj.dao.UserDao;
 import bfs.TeamProj.domain.User;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Repository
 public class HibernateUserDao extends AbstractHibernateDAO<User> implements UserDao {
     public HibernateUserDao() {
@@ -34,4 +37,8 @@ public class HibernateUserDao extends AbstractHibernateDAO<User> implements User
     public User updateUser(User user) {
         return update(user);
     }
+
+    static List<User> list = new ArrayList<>();
+    @Override
+    public List<User> findAll() {return list;}
 }
