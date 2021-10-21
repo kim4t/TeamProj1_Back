@@ -3,12 +3,15 @@ package bfs.TeamProj.Service;
 import bfs.TeamProj.aop.TrackExecutionTime;
 import bfs.TeamProj.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.*;
 
 @Service
+@EnableCaching
 public class HRService {
     @Autowired
     private PersonService personService;
@@ -26,6 +29,7 @@ public class HRService {
     private ContactService contactService;
 
     @TrackExecutionTime
+    @Cacheable(cacheNames = "getAllEmployeeProfile")
     public List<EmployeeProfile> getAllEmployeeProfile() {
         List<EmployeeProfile> res = new ArrayList<>();
         List<Employee> employeeList = employeeService.getAllEmployee();

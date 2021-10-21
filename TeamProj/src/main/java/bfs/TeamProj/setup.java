@@ -60,7 +60,7 @@ public class setup implements CommandLineRunner {
         //test();
         //javaAop();
         ///springAop();
-       springAopException();
+       //springAopException();
     }
     @Autowired
     UserDao userDao;
