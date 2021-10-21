@@ -23,6 +23,7 @@ public class TeamProjApplication {
 
 		SpringApplication.run(TeamProjApplication.class, args);
 
+
 	}
 
 

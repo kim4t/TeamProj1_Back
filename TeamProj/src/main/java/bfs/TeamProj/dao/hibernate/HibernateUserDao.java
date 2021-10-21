@@ -4,6 +4,7 @@ import bfs.TeamProj.dao.AbstractHibernateDAO;
 import bfs.TeamProj.dao.UserDao;
 import bfs.TeamProj.domain.User;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class HibernateUserDao extends AbstractHibernateDAO<User> implements UserDao {
@@ -16,6 +17,7 @@ public class HibernateUserDao extends AbstractHibernateDAO<User> implements User
         return findById(id);
     }
 
+    @Transactional
     public User getUserByEmail(String email){
         return findByField("email", email);
     }
@@ -33,5 +35,10 @@ public class HibernateUserDao extends AbstractHibernateDAO<User> implements User
     @Override
     public User updateUser(User user) {
         return update(user);
+    }
+
+    @Override
+    public void test() {
+        System.out.println("sdfsdf");
     }
 }

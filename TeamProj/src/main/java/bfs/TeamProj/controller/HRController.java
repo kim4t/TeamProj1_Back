@@ -78,11 +78,11 @@ public class HRController {
 
     @PostMapping("/documentationReviewDetail")
     public List<DocumentationReviewForm> getApplicationDtailById(HttpServletResponse httpServletResponse, Integer employeeId, String title, HttpServletRequest request) {
-//        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
-//        System.out.println(username);
-//        if (username == null) {
-//            return null;
-//        }
+        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
+        System.out.println(username);
+        if (username == null) {
+            return null;
+        }
         System.out.println(employeeId);
 
         return hrService.getPersonalDocumentListByEmployeeId(employeeId,title);

@@ -1,5 +1,6 @@
 package bfs.TeamProj.Service;
 
+import bfs.TeamProj.aop.TrackExecutionTime;
 import bfs.TeamProj.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,7 @@ public class HRService {
     @Autowired
     private ContactService contactService;
 
+    @TrackExecutionTime
     public List<EmployeeProfile> getAllEmployeeProfile() {
         List<EmployeeProfile> res = new ArrayList<>();
         List<Employee> employeeList = employeeService.getAllEmployee();
@@ -44,6 +46,7 @@ public class HRService {
         return res;
     }
 
+    @TrackExecutionTime
     public List<StatusProfile> getAllStatusProfile() {
         List<StatusProfile> res = new ArrayList<>();
         List<Employee> employeeList = employeeService.getAllEmployee();
@@ -73,7 +76,7 @@ public class HRService {
         }
         return res;
     }
-
+    @TrackExecutionTime
     public List<ApplicationForm> getAllApplication() {
         List<ApplicationForm> res = new ArrayList<>();
         List<ApplicationWorkFlow> applicationWorkFlowList = applicationWorkFlowService.getAllApplicationWorkFlow();
@@ -87,7 +90,7 @@ public class HRService {
         }
         return res;
     }
-
+    @TrackExecutionTime
     public OnBoardDataHolder getApplicationDetailById(int employeeId) {
         Employee employee = employeeService.getEmployeeById(employeeId);
         Person person = personService.getPersonById(employee.getPerson().getId());
@@ -182,7 +185,7 @@ public class HRService {
 
         return data;
     }
-
+    @TrackExecutionTime
     public ApplicationWorkFlow updateApplicationWorkFlow(int employeeId, String status, String comments){
         ApplicationWorkFlow current = applicationWorkFlowService.getApplicationWorkFlowByEmployeeId(employeeId);
         ApplicationWorkFlow applicationWorkFlow = new ApplicationWorkFlow();
@@ -195,7 +198,7 @@ public class HRService {
         applicationWorkFlow.setEmployee(current.getEmployee());
        return applicationWorkFlowService.updateApplicationWorkFlow(applicationWorkFlow);
     }
-
+    @TrackExecutionTime
     public ApplicationWorkFlow updateOptApplicationWorkFlow(int employeeId, String status, String comments, String type){
         ApplicationWorkFlow current = applicationWorkFlowService.getApplicationWorkFlowByEmployeeId(employeeId);
         ApplicationWorkFlow applicationWorkFlow = new ApplicationWorkFlow();
@@ -209,7 +212,7 @@ public class HRService {
         return applicationWorkFlowService.updateApplicationWorkFlow(applicationWorkFlow);
     }
 
-
+    @TrackExecutionTime
     public List<DocumentationReviewForm> getPersonalDocumentListByEmployeeId(int employeeId,String title){
         List<DocumentationReviewForm> res = new ArrayList<>();
         List<PersonalDocument> documentList = personalDocumentService.getPersonalDocumentListByEmployeeId(employeeId);
