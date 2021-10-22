@@ -4,6 +4,8 @@ import bfs.TeamProj.dao.PersonDao;
 import bfs.TeamProj.domain.Person;
 import bfs.TeamProj.exception.AgeInvalidException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +22,7 @@ public class PersonService {
     }
 
     @Transactional
+    //@Cacheable("persons")
     public Person getPersonById(int id) {
         return personDao.getPersonById(id);
     }

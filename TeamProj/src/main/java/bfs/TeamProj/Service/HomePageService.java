@@ -3,6 +3,8 @@ package bfs.TeamProj.Service;
 import bfs.TeamProj.domain.*;
 import bfs.TeamProj.exception.AgeInvalidException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -116,6 +118,8 @@ public class HomePageService {
         return personalDocumentList;
     }
 
+    @Cacheable("personInfo")
+    //@CachePut("PersonInfo")
     public PersonalInformation assemble(String username) {
         User user = userService.getUserByUserName(username);
         Person person = user.getPerson();

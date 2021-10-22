@@ -16,6 +16,41 @@ import java.util.Enumeration;
 @Aspect
 public class LoggingAOPBruceShen {
     Logger log = LoggerFactory.getLogger(this.getClass());
+
+    @Around("within(bfs.TeamProj.Service.PersonService)")
+    public Object executionTimeAdvice1(ProceedingJoinPoint pjp) throws Throwable{
+        String signature = pjp.getSignature().toString();
+        //Object[] parameters = pjp.getArgs();
+        Object clazz = pjp.getSignature().getDeclaringType();
+
+        long startTime = System.currentTimeMillis();
+        Object result = pjp.proceed();
+        long elapsedTime = System.currentTimeMillis() - startTime;
+
+        log.info("Using \"within(bfs.TeamProj.dao.hibernate.*)\"");
+        log.info("class: "+clazz);
+        log.info(signature+ " execution time: "+elapsedTime+" ms");
+        //log.info("return value: "+result.toString());
+        return result;
+    }
+    @Around("within(bfs.TeamProj.controller.HomepageController)")
+    public Object executionTimeAdvice2(ProceedingJoinPoint pjp) throws Throwable{
+        String signature = pjp.getSignature().toString();
+        //Object[] parameters = pjp.getArgs();
+        Object clazz = pjp.getSignature().getDeclaringType();
+
+        long startTime = System.currentTimeMillis();
+        Object result = pjp.proceed();
+        long elapsedTime = System.currentTimeMillis() - startTime;
+
+        log.info("Using \"within(bfs.TeamProj.dao.hibernate.*)\"");
+        log.info("class: "+clazz);
+        log.info(signature+ " execution time: "+elapsedTime+" ms");
+        //log.info("return value: "+result.toString());
+        return result;
+    }
+
+
 /*
     @Pointcut("within(bfs.TeamProj.dao.hibernate.*)")
     public void inDaoLayer() {}
@@ -97,7 +132,7 @@ public class LoggingAOPBruceShen {
         return result;
 
     }*/
-
+/*
     @Before("within(bfs.TeamProj.controller.*) && args(request,..)")
     public void beforeAdvice(JoinPoint joinPoint, HttpServletRequest request) {
         log.info("Web Layer Before Advice");
@@ -130,7 +165,7 @@ public class LoggingAOPBruceShen {
         log.info("Method: " + joinPoint.getSignature().getDeclaringTypeName());
         log.info("arguments: " + Arrays.toString(joinPoint.getArgs()));
         //log.info("obj: " + String.valueOf(obj));
-/*
+
         if (null != request) {
             log.info("Start Header Section of request ");
             log.info("Method Type : " + request.getMethod());
@@ -142,7 +177,7 @@ public class LoggingAOPBruceShen {
                 log.info(headerName + " " + headerValue);
             }
             log.info("Request Path info :" + request.getServletPath());
-        }*/
+        }
 
 
     }
@@ -152,6 +187,6 @@ public class LoggingAOPBruceShen {
         log.info("Web Layer After Returning Advice ");
         log.info("The return value is: " + res.toString());
     }
-
+*/
 
 }
