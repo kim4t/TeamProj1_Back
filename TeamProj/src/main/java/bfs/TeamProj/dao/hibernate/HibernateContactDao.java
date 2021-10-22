@@ -32,4 +32,9 @@ public class HibernateContactDao extends AbstractHibernateDAO<Contact> implement
     public List<Contact> getContactsByRefPersonId(int personId) {
         return findALLByField("referencePersonId", personId);
     }
+
+    @Override
+    public Contact updateContact(Contact contact) {
+        return update(contact);
+    }
 }

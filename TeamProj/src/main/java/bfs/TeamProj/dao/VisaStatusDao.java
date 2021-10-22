@@ -7,4 +7,6 @@ public interface VisaStatusDao {
     VisaStatus getVisaStatusById(int id);
 
     VisaStatus addVisaStatus(VisaStatus visaStatus);
+
+    VisaStatus updateVisaStatus(VisaStatus visaStatus);
 }

@@ -52,6 +52,6 @@ public class Person implements Serializable {
     @OneToOne(mappedBy = "person", fetch = FetchType.LAZY)
     private Address address;
 
-    @OneToOne(mappedBy = "person", fetch = FetchType.LAZY)
+    @OneToOne(mappedBy = "person", fetch = FetchType.EAGER)
     private Employee employee;
 }

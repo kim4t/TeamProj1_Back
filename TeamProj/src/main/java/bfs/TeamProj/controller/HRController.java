@@ -3,17 +3,13 @@ package bfs.TeamProj.controller;
 import bfs.TeamProj.Service.HRService;
 import bfs.TeamProj.Service.HouseService;
 import bfs.TeamProj.constant.Constant;
-import bfs.TeamProj.domain.EmployeeProfile;
-import bfs.TeamProj.domain.PersonalInformation;
-import bfs.TeamProj.domain.StatusProfile;
+import bfs.TeamProj.domain.*;
 import bfs.TeamProj.security.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 @RestController
@@ -23,11 +19,9 @@ public class HRController {
     @Autowired
     private HRService hrService;
 
-    //@Autowired
-    //private HouseService houseService;
 
     @GetMapping("/employeeProfile")
-    public List<EmployeeProfile> getAllEmployeeProfile(HttpServletRequest request){
+    public List<EmployeeProfile> getAllEmployeeProfile(HttpServletRequest request) {
 //        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
 //        System.out.println(username);
 //        if(username == null) {
@@ -37,25 +31,83 @@ public class HRController {
     }
 
     @GetMapping("/statusTracking")
-    public List<StatusProfile> getAllStatusProfile(HttpServletRequest request){
+    public List<StatusProfile> getAllStatusProfile(HttpServletRequest request) {
 //        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
 //        System.out.println(username);
-//        if(username == null) {
+//        if (username == null) {
 //            return null;
 //        }
         return hrService.getAllStatusProfile();
     }
 
-    @GetMapping("/visaStatusManagement")
-    public String foo (HttpServletRequest request){
-        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
-        System.out.println(username);
-        if(username == null) {
-            return null;
-        }
-        return null;
+    @GetMapping("/applicationReview")
+    public List<ApplicationForm> getAllApplication(HttpServletRequest request) {
+//        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
+//        System.out.println(username);
+//        if (username == null) {
+//            return null;
+//        }
+        return hrService.getAllApplication();
     }
 
+    @PostMapping("/applicationReviewDetail")
+    public OnBoardDataHolder getApplicationDetailById(HttpServletResponse httpServletResponse, Integer employeeId, HttpServletRequest request) {
+//        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
+//        System.out.println(username);
+//        if (username == null) {
+//            return null;
+//        }
+        System.out.println(employeeId);
 
+        return hrService.getApplicationDetailById(employeeId);
+    }
 
+    @PostMapping("/applicationReviewDetail/update")
+    public ApplicationWorkFlow changeStatus(HttpServletResponse httpServletResponse,
+                                            int employeeId, String status, String comments, HttpServletRequest request) {
+
+//        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
+//        System.out.println(username);
+//        if (username == null) {
+//            return null;
+//        }
+        System.out.println();
+        System.out.println(comments);
+        return hrService.updateApplicationWorkFlow(employeeId, status, comments);
+    }
+
+    @PostMapping("/documentationReviewDetail")
+    public List<DocumentationReviewForm> getApplicationDtailById(HttpServletResponse httpServletResponse, Integer employeeId, String title, HttpServletRequest request) {
+//        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
+//        System.out.println(username);
+//        if (username == null) {
+//            return null;
+//        }
+        System.out.println(employeeId);
+
+        return hrService.getPersonalDocumentListByEmployeeId(employeeId,title);
+    }
+
+    @PostMapping("/documentationReviewDetail/update")
+    public ApplicationWorkFlow changeOptStatus(HttpServletResponse httpServletResponse,
+                                            int employeeId, String status, String comments, String type, HttpServletRequest request) {
+
+//        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
+//        System.out.println(username);
+//        if (username == null) {
+//            return null;
+//        }
+        System.out.println();
+        System.out.println(comments);
+        return hrService.updateOptApplicationWorkFlow(employeeId, status, comments, type);
+    }
+//    @GetMapping("/visaStatusManagement")
+//    public String foo(HttpServletRequest request) {
+//        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
+//        System.out.println(username);
+//        if (username == null) {
+//            return null;
+//        }
+//        return null;
+//    }
 }

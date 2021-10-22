@@ -24,7 +24,12 @@ public class PersonService {
     }
 
     @Transactional
-    public List<Person> getAllPerson(){
+    public List<Person> getAllPerson() {
         return personDao.getALlPerson();
+    }
+
+    @Transactional
+    public Person updatePerson(Person p) {
+        return personDao.updatePerson(p);
     }
 }

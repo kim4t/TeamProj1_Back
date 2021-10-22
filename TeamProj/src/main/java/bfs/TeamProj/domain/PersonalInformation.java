@@ -14,6 +14,9 @@ public class PersonalInformation {
     private EmployeeSection employeeSection;
     private List<EmergencyContact> emergencyContactList;
     private List<PersonalDocument> personalDocumentList;
+    private ReferencePerson referencePerson;
+    private String hrComment;
+    private String appStatus;
 
 
     @Data
@@ -21,6 +24,7 @@ public class PersonalInformation {
         private int personId;
         private String firstName;
         private String lastName;
+        private String middleName;
         private String avatar;
         private String dob;
         private String gender;
@@ -40,6 +44,7 @@ public class PersonalInformation {
 
     @Data
     public static class ContactSection {
+        private int personId;
         private String email;
         private String cellphone;
         private String alternatePhone;
@@ -54,6 +59,9 @@ public class PersonalInformation {
         private LocalDate startDate;
         private LocalDate endDate;
         private String title;
+        private String car;
+        private String driverLicense;
+        private LocalDate driverLicenseExpirationDate;
     }
 
     @Data
@@ -71,6 +79,19 @@ public class PersonalInformation {
         private int docId;
         private String path;
         private String title;
+        private LocalDate createDate;
+    }
+
+    @Data
+    public static class ReferencePerson{
+        private int personId;
+        private String firstName;
+        private String lastName;
+        private String middleName;
+        private String email;
+        private String cellphone;
+        private String relationship;
+        private AddressSection addressSection;
     }
 
 

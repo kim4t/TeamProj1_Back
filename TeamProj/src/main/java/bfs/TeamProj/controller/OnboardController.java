@@ -1,9 +1,13 @@
 package bfs.TeamProj.controller;
 
 import bfs.TeamProj.Service.*;
+import bfs.TeamProj.constant.Constant;
 import bfs.TeamProj.domain.*;
+import bfs.TeamProj.security.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 
 @RestController
@@ -12,11 +16,30 @@ import org.springframework.web.bind.annotation.*;
 public class OnboardController {
     @Autowired
     private OnBoardService onBoardService;
+    @Autowired
+    private HomePageService homePageService;
 
     @PostMapping(path = "/onboard")
     public String onBoard(@RequestBody OnBoardDataHolder onBoardDataHolder) {
         return onBoardService.assemble(onBoardDataHolder);
+//        System.out.println(onBoardDataHolder.toString());
+//        return onBoardDataHolder.toString();
     }
+    @GetMapping("/onboard/rejected")
+    public PersonalInformation getRejected(HttpServletRequest request){
+        String username = JwtUtil.getSubject(request, Constant.JWT_TOKEN_COOKIE_NAME, Constant.SIGNING_KEY);
+        System.out.println(username);
+        if (username == null) {
+            return null;
+        }
+        return homePageService.assemble(username);
+    }
+
+    @PostMapping(path ="/onboard/update")
+    public PersonalInformation reOnboard(@RequestBody PersonalInformation personalInformation) {
+        return homePageService.reOnboard(personalInformation);
+    }
+
 
 /*
     @PostMapping(path = "/onboard")

@@ -27,4 +27,9 @@ public class HibernatePersonDao extends AbstractHibernateDAO<Person> implements 
     public Person addPerson(Person person) {
         return create(person);
     }
+
+    @Override
+    public Person updatePerson(Person person) {
+        return update(person);
+    }
 }

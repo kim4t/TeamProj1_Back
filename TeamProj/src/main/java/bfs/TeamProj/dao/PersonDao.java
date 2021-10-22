@@ -11,4 +11,6 @@ public interface PersonDao {
 
     Person addPerson(Person person);
 
+    Person updatePerson(Person person);
+
 }

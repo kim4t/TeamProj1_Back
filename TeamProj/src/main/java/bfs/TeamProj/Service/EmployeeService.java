@@ -28,4 +28,8 @@ public class EmployeeService {
         return employeeDao.addEmployee(employee);
     }
 
+    @Transactional
+    public Employee updateEmployee(Employee employee) {
+        return employeeDao.updateEmployee(employee);
+    }
 }
