@@ -2,9 +2,11 @@ package bfs.TeamProj.Service;
 
 import bfs.TeamProj.aop.TrackExecutionTime;
 import bfs.TeamProj.domain.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -12,6 +14,7 @@ import java.util.*;
 
 @Service
 @EnableCaching
+@Slf4j
 public class HRService {
     @Autowired
     private PersonService personService;
@@ -30,6 +33,7 @@ public class HRService {
 
     @TrackExecutionTime
     @Cacheable(cacheNames = "getAllEmployeeProfile")
+    @Async("taskExecutor")
     public List<EmployeeProfile> getAllEmployeeProfile() {
         List<EmployeeProfile> res = new ArrayList<>();
         List<Employee> employeeList = employeeService.getAllEmployee();
