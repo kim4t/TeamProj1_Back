@@ -121,6 +121,7 @@ public class HomePageService {
     @Cacheable("personInfo")
     //@CachePut("PersonInfo")
     public PersonalInformation assemble(String username) {
+
         User user = userService.getUserByUserName(username);
         Person person = user.getPerson();
         Address address = person.getAddress();

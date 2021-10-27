@@ -33,7 +33,7 @@ public class LoggingAOPBruceShen {
         //log.info("return value: "+result.toString());
         return result;
     }
-    @Around("within(bfs.TeamProj.controller.HomepageController)")
+    @Around("within(bfs.TeamProj.controller.*)")
     public Object executionTimeAdvice2(ProceedingJoinPoint pjp) throws Throwable{
         String signature = pjp.getSignature().toString();
         //Object[] parameters = pjp.getArgs();

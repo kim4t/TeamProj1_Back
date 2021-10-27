@@ -1,5 +1,6 @@
 package bfs.TeamProj.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -36,7 +37,13 @@ public class Address implements Serializable {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "personId")
+    @JsonIgnore
     private Person person;
+
+    @Override
+    public String toString() {
+        return "id: " + this.id + " address:" + this.addressLine1;
+    }
 
 
 }

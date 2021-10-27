@@ -11,9 +11,12 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.EnableAsync;
+
 import java.util.UUID;
 @SpringBootApplication
-@EnableCaching
+//@EnableCaching
+@EnableAsync
 public class TeamProjApplication {
 	@Autowired
 	private EmailSenderService emailSenderService;
