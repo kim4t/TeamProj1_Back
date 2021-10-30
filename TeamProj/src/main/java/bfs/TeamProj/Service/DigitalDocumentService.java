@@ -22,4 +22,9 @@ public class DigitalDocumentService {
     public List<DigitalDocument> getAllDigitalDocument() {
         return digitalDocumentDao.getAllDigitalDocument();
     }
+
+    @Transactional
+    public DigitalDocument getDigitalDocumentById(int id){
+        return digitalDocumentDao.getDigitalDocumentById(id);
+    }
 }

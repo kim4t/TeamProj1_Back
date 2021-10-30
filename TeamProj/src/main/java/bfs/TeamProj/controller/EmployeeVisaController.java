@@ -1,7 +1,9 @@
 package bfs.TeamProj.controller;
 
+import bfs.TeamProj.Service.DigitalDocumentService;
 import bfs.TeamProj.Service.EmployeeVisaService;
 import bfs.TeamProj.constant.Constant;
+import bfs.TeamProj.domain.DigitalDocument;
 import bfs.TeamProj.domain.EmployeeVisaInformation;
 import bfs.TeamProj.security.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/employee/visa")
-@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", allowCredentials = "true")
+//@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*", allowCredentials = "true")
 public class EmployeeVisaController {
     @Autowired
     private EmployeeVisaService employeeVisaService;
+    @Autowired
+    private DigitalDocumentService digitalDocumentService;
 
     @GetMapping("/homePage")
     public EmployeeVisaInformation userInfo(HttpServletRequest request) {
@@ -37,8 +41,14 @@ public class EmployeeVisaController {
     }
 
     @PostMapping("/newStep")
-    public EmployeeVisaInformation.VisaStage newStep(HttpServletRequest request, @RequestBody EmployeeVisaInformation.VisaStage visaStage) {
-        employeeVisaService.newStep(visaStage);
-        return visaStage;
+    public EmployeeVisaInformation.VisaStage newStep(@RequestBody EmployeeVisaInformation.VisaStage visaStage) {
+        System.out.println("in controller");
+        return employeeVisaService.newStep(visaStage);
+        //return visaStage;
+    }
+
+    @GetMapping("/test/{id}")
+    public DigitalDocument getDoc(@PathVariable int id){
+        return digitalDocumentService.getDigitalDocumentById(id);
     }
 }

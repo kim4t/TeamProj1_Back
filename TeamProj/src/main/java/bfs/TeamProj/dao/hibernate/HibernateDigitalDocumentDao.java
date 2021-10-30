@@ -21,4 +21,9 @@ public class HibernateDigitalDocumentDao extends AbstractHibernateDAO<DigitalDoc
     public List<DigitalDocument> getAllDigitalDocument() {
         return findAll();
     }
+
+    @Override
+    public DigitalDocument getDigitalDocumentById(int id) {
+        return findById(id);
+    }
 }

@@ -26,6 +26,18 @@ public class ApplicationWorkFlow implements Serializable {
     @Column(name = "type", nullable = false, length = 250)
     private String type;
 
+    public ApplicationWorkFlow() {
+
+    }
+
+    public ApplicationWorkFlow(int id, LocalDate createdDate, LocalDate modificationDate, String status, String type) {
+        this.id = id;
+        this.createdDate = createdDate;
+        this.modificationDate = modificationDate;
+        this.status = status;
+        this.type = type;
+    }
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "employeeId")
     private Employee employee;

@@ -60,7 +60,7 @@ public class setup implements CommandLineRunner {
 
         //cleanAlltable();
         //dataSetUp();
-        aopLogging();
+        //aopLogging();
 
     }
 

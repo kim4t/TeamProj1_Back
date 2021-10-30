@@ -8,4 +8,6 @@ public interface DigitalDocumentDao {
     DigitalDocument addDigitalDocument(DigitalDocument doc);
 
     List<DigitalDocument> getAllDigitalDocument();
+
+    DigitalDocument getDigitalDocumentById(int id);
 }

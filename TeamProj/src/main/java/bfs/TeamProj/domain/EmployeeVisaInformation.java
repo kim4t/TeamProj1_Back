@@ -12,17 +12,30 @@ public class EmployeeVisaInformation {
     private List<VisaDocument> visaDocumentList;
 
     @Data
-    public static class VisaStage{
+    public static class VisaStage {
         private int awfId;
         private String status;
         private String type;
         private String comment;
         private LocalDate visaEndDate;
         private boolean uploadedI983;
+
+        public VisaStage() {
+
+        }
+
+        public VisaStage(int awfId, String status, String type, String comment, LocalDate visaEndDate, boolean uploadedI983){
+            this.awfId = awfId;
+            this.status = status;
+            this.type =type;
+            this.comment = comment;
+            this.visaEndDate = visaEndDate;
+            this.uploadedI983 = uploadedI983;
+        }
     }
 
     @Data
-    public static class SampleDocument{
+    public static class SampleDocument {
         private String type;
         private String path;
     }
